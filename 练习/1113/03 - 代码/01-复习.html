@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  微博发布
+    点击发布
+      创建元素
+        元素.innerHTMl = 新的字符串;
+        document.createElement('标签名')
+
+      把元素放到结构里面(插入元素)
+        父元素.appendChild(子元素)
+
+        父元素.insertBefore(子元素,旧的子元素)
+
+    组合键发布
+      键盘事件
+        - keydown
+        - keyup
+          - 事件对象
+            只要给事件处理程序添加一个参数
+              元素.on交互 = function(e){
+                e 就是事件对象
+                console.log(e);
+              }
+          - 获取按下的按键是哪一个
+              - keyCode - 是一个和按键一一对应的数字
+              - 鼠标坐标
+                - clientX
+                - clientY
+    删除
+      父元素.removeChild(子元素);
+
+      父元素.innerHTML = '';
+
+  搜索历史的显示隐藏
+    把光标放到输入框 - focus
+      让搜索历史显示 - display
+        style
+          元素.style.css属性名 = 新的值
+
+          ul.style.display = 'block';
+
+        clsssName
+        classList
+          元素.classList.add(类名)
+          ul.classList.add(能够让ul显示的类名);
+    光标离开输入框 - blur
+      搜索里隐藏 - display
+        元素.classList.remove(类名)
+        ul.classLiat.remove(能让ul显示的类名)
+
+  全选/全不选
+    点击全选，设置单选够勾选或者不勾选
+      开关属性
+        元素.checked = true;
+        元素.checked = false;
+
+        元素.selected = true;
+
+    点击单选，如果都勾选了，设置全选也勾选，反之不勾选
+      证明全选比较难 —— 反证法
+        1.假设成立
+        2.使用循环找到反例
+          如果找到把假设推翻
+        3.再次判断假设是否成立
+*/
+</script>
+</html>

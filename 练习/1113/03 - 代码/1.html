@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .yeye {
+            width: 400px;
+            height: 400px;
+            background-color: green;
+        }
+
+        .baba {
+            width: 300px;
+            height: 300px;
+            background-color: yellow;
+            position: relative;
+        }
+
+        .erzi {
+            position: absolute;
+            left: 400px;
+            width: 200px;
+            height: 200px;
+            background-color: #0094ff;
+            /* 这个颜色记住，以后你们会懂的 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="yeye">
+        <div class="baba">
+            <div class="erzi"></div>
+        </div>
+</body>
+<script>
+    let yeye = document.querySelector('.yeye');
+    let baba = document.querySelector('.baba');
+    let erzi = document.querySelector('.erzi');
+    yeye.addEventListener('click',function(){
+  console.log('我是你爷爷');
+},true);
+baba.addEventListener('click',function(){
+  console.log('我是你爸爸');
+},true);
+erzi.addEventListener('click',function(){
+  console.log('我是你儿子');
+},true);
+/* ture 提示优先级 */
+</script>
+
+</html>
