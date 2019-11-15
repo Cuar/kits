@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>微博发布效果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .weibo {
+            width: 600px;
+            border: 1px solid #ccc;
+
+            margin: 100px auto;
+            padding: 10px;
+
+        }
+
+        .weibo-text {
+            width: 590px;
+            height: 140px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+            resize: none;
+        }
+
+        .weibo-text:focus {
+            border-color: #f60;
+        }
+
+        .weibo-btn {
+            width: 80px;
+            height: 30px;
+            background-color: #f90;
+            color: #fff;
+            border: 0 none;
+            margin-top: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+            outline: 0 none;
+        }
+
+        .weibo-list {
+            padding-top: 10px;
+        }
+
+        .weibo-list li {
+            font-size: 14px;
+            line-height: 30px;
+            border-bottom: 1px dotted #ccc;
+            overflow: hidden;
+        }
+
+        .weibo-list li p {
+            float: left;
+        }
+
+        .weibo-list li span {
+            float: right;
+            cursor: pointer;
+        }
+
+        .weibo-list li input {
+            height: 24px;
+            line-height: 24px;
+            width: 300px;
+            font-size: 14px;
+            border: 0 none;
+        }
+
+        .time {
+            margin-right: 10px;
+            font-style: normal;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="weibo">
+        <textarea class="weibo-text"></textarea>
+        <input class="weibo-btn" value="发布" type="button">
+        <ul class="weibo-list">
+            <!-- <li>
+            <p class="content">快来收了这九款用上就停不下来的应用吧！！</p>
+            <span class="time"></span>
+            <span class="del">删除</span>
+        </li> -->
+        </ul>
+    </div>
+</body>
+<script src="./kits.js"></script>
+<script>
+
+    let text = document.querySelector('.weibo-text');
+    let btn = document.querySelector('.weibo-btn');
+    let ul = document.querySelector('.weibo-list');
+
+ 
+    let data = localStorage.getItem('wbshuju');
+
+    let arr = !data ? [] : JSON.parse(data);
+    
+    arr.forEach(function (e) {
+        let li = document.createElement('li');
+        /* add内容 */
+        let time = formatDate();
+        /*  */
+        li.innerHTML='<p class="content">' + e.content + '</p><span data-id="'+e.id +'" class="del">删除</span><em class="time">' + e.time + '</em>';
+
+        /* li放入ul中 */
+        let first = ul.children[0];
+        ul.insertBefore(li,first);
+
+    })
+
+
+    /* 注册事件 */
+    btn.onclick =function(){
+        let content = text.value;
+    // 创建一个新的li
+    let li = document.createElement('li');
+    // 给li添加内容
+    let time = formatDate();
+
+    let id = 0;
+    arr.forEach(function(e){
+      if(id < e.id){
+        id = e.id;
+      }
+    });
+    id++;
+    li.innerHTML = '<p class="content">' + content + '</p><span data-id="'+ id +'" class="del">删除</span><em class="time">' + time + '</em>';
+    // 把li放到ul里面 ,ul.children 可以得到该元素的所有的子元素
+    let first = ul.children[0];
+    ul.insertBefore(li, first);
+    // 清空文本域
+    text.value = '';
+
+   
+    let obj = {
+      id:id,
+      content: content,
+      time: time
+    };
+    arr.push(obj);
+   
+    let json = JSON.stringify(arr);
+    // console.log(json);
+    localStorage.setItem('wbshuju', json);
+  }
+    /* 实现删除 */
+    ul.addEventListener('click', function (e) {
+    // 我们通常不会直接判断点击的是否是一个标签名，而是判断点击的元素身上的类名比较多
+    if (e.target.classList.contains('del')) {
+      // console.log('点击的是删除');
+      // 移除对应的li
+      ul.removeChild(e.target.parentNode);
+
+      /* ---------- */
+      // 点击的是不仅仅要li删除，还要把本地的数据删除
+      // 本地数据里面存储的是字符串，需要我们先得到，然后转换为数据，然后在删除掉某一个，然后在覆盖回去
+      // 获取
+      let data = localStorage.getItem('wbshuju');
+      let arr = JSON.parse(data);
+      // 得到按钮所对应的id
+      let id = e.target.dataset.id;
+    
+      // 利用h5里面提供的新的方法实现简化
+      arr = arr.filter(function(e){
+        return e.id != id;
+      });
+
+      // 把新数据覆盖回本地
+      let json = JSON.stringify(arr);
+      localStorage.setItem('wbshuju',json);
+    }
+  })
+</script>
+
+</html>
