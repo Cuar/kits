@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 400px;
+      height: 400px;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+<div class="box"></div>
+</body>
+<script>
+/*
+  移动端进行操作的时候，有时候，需要获取触摸点的位置进行判断
+    - 得到触摸点
+    - 三个触摸点的集合
+      - 集合 - 多个数据 - 移动端里面可以使用多个手指进行触摸，会得到多个触摸点，所以得到的是一个集合
+
+    三个集合
+      - touches
+        - 屏上的触摸点
+      - targetTouches
+        - 元素上的触摸点
+      - changedTouches
+        - 改变了的触摸点
+*/
+
+let box = document.querySelector('.box');
+// box.addEventListener('touchstart',function(e){
+//   console.log(e.touches);
+//   console.log(e.targetTouches);
+//   console.log(e.changedTouches);
+// })
+
+// box.addEventListener('touchmove',function(e){
+//   console.log(e.touches);
+//   console.log(e.targetTouches);
+//   console.log(e.changedTouches);
+// })
+
+box.addEventListener('touchend',function(e){
+  console.log(e.touches);
+  console.log(e.targetTouches);
+  // 此时手指离开了屏幕，元素和屏幕上面都没有触摸点了，只能从变化了的触摸点里面获取位置
+  console.log(e.changedTouches);
+})
+</script>
+</html>

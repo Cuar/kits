@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  轮播图
+    移动端的轮播图
+      三个触摸事件
+        touchstart - 开始触摸的时候触发
+        touchemove - 触摸点在移动端额时候触发
+        touchend - 手指离开的时候触发
+      三个触摸点的集合
+        touches   - 屏幕上的触摸点的集合
+        targetTouches - 元素上的触摸点的集合、
+          - 通常情况下上面两个是一样的
+        changedTouches - 改变了的触摸点的集合
+          - 改变了的触摸点
+          - 如果是触摸点消失的时候 - 触摸结束事件里面，只能从这里获取触摸点了
+      封装tap事件
+        js里面没有提供移动端的很多操作事件，需要自己封装
+          tap - 轻击
+            利用触摸开始和触摸结束事件
+              - 判断是否是单指操作
+              - 判断点击的时间不能太长
+              - 触摸点的偏差不能太大
+          封装
+            - 如果想要在封装的代码里面，可以随意的执行另一段代码 —— 把函数作为参数传递 - 回调函数
+            - 参数的省略机制
+      类库
+        什么是类库
+          别人封装好的一个作为工具使用的js文件
+        怎么用
+          1.下载，引入，一定要在使用之前引入
+          2.看文档学习如何使用
+
+        模块化
+          - 模块 - 根据功能划分的不同的js文件
+          - touch.js
+
+      插件
+        - 为了提高工作效率
+        - 看文档学习如何使用
+*/
+</script>
+</html>

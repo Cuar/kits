@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        img {
+            display: block;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button >开灯</button>
+    <button>关灯</button>
+    <img src="images/coder.jpg" />
+</body>
+<!-- 路径写错了 -->
+<script src="./jquery/jquery-2.2.2.js"></script>
+<script>
+    /* 实现开关灯效果 */
+    $(function () {
+        /* 效果是：
+    点击关灯按钮，让body的背景颜色变灰
+    点击开灯按钮，让body的背景颜色恢复原状
+*/
+        let btn1 = $('button:nth-child(2)');
+
+        btn1.on('click', function () {
+            $('body').css('backgroundColor', '#ccc');
+        })
+
+
+        $('button:nth-child(1)').on('click', function () {
+            $('body').css('backgroundColor', '');
+        })
+    });
+</script>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: green;
+      padding: 10px;
+      border: 10px solid #0094ff;
+    }
+
+    /* @media screen and (max-width: 400px){
+      body {
+        background-color: red;
+      }
+    }
+    @media screen and (min-width: 401px) and (max-width: 600px ){
+      body {
+        background-color: green;
+      }
+    }
+    @media screen and (min-width: 601px){
+      body {
+        background-color: blue;
+      }
+    } */
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores officiis recusandae eveniet maxime quos! Nemo
+    autem veritatis laudantium harum iure voluptatibus officiis perspiciatis? Possimus voluptatibus cumque sint
+    repudiandae, nam incidunt?
+  </div>
+  <!-- <div class="box">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores officiis recusandae eveniet maxime quos! Nemo autem veritatis laudantium harum iure voluptatibus officiis perspiciatis? Possimus voluptatibus cumque sint repudiandae, nam incidunt?
+    </div> -->
+</body>
+<script>
+  /* 之前使用放大镜的时候，获取的是  offsetWidth和offsetHeight
+      是包含边框的，移动范围，应该是在边框内部，就是希望得到的结果是不包含边框的
+
+      js里面有另外的一个属性，该属性可以获取到除了border之外的宽高
+
+      - 可视区域大小
+        - 可视区域 = padding + content
+          - 一个容器用于展示内容的部分
+          - 边框是否是用于展示内容的？不是
+        - 得到一个容器的可视区域大小
+          - clientWidth / clientHeight
+
+          - 以前在媒体查询没有出来之前，是使用这个 可视区域宽度实现响应式布局的
+          - 慢慢被媒体查询取代了
+
+   */
+
+  // let box = document.querySelector('.box');
+  // console.log(box.offsetWidth);
+  // console.log(box.clientWidth);
+
+  /* 以前使用这个属性来实现响应式布局 */
+  window.onresize = function () {
+    // 得到body的宽度
+    let width = document.body.clientWidth;
+    if (width <= 400) {
+      document.body.style.backgroundColor = 'red';
+      // 获取别的元素，修改元素的样式
+    } else if (width > 400 && width <= 600) {
+      document.body.style.backgroundColor = 'green';
+    } else {
+      document.body.style.backgroundColor = 'blue';
+    }
+  }
+
+</script>
+
+</html>

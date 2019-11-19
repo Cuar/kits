@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="按钮" id="btn">
+    <input type="button" value="按钮2" id="btn2">
+    <div class="box"></div>
+</body>
+<script src="./jquery/jquery-2.2.2.js"></script>
+<script>
+$(function(){
+    let btn =$('#btn');
+    let btn2 =$('#btn2');
+
+  /*   var body = document.body; */
+    btn.on('click',function(){
+       /*  console.log('123'); */
+        $('body').css('backgroundColor','#ccc');
+
+    })
+    
+    btn2.on('click',function(){
+        /* console.log('123');
+        $('body').css('backgroundColor', ''); */
+
+        body.css({
+         /*    backgroundColor:"#fff" */
+            backgroundColor:'red'
+        });
+
+    })
+})
+</script>
+</html>

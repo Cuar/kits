@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+</body>
+<script src="./07-zepto.js"></script>
+<script>
+/*
+  自己封装手势操作，一般比较复杂，而且耗时，开发里面一般不会做太耗时的事情
+
+  移动端里面的手势操作，有人已经封装好了，此时只需要拿过来使用就行 —— 拿来主义
+
+  移动端的一个 类库
+    类库 - 人家封装好的一个js代码，里面有很多常用的操作的封装，只需要学会这些封装好的东西如何使用
+
+    - zepto
+      - 随着三大框架的 市场占有率 越来越大，以及框架的完整度越来越高
+      - 组件化开发思想的普及
+      - zepto使用也在逐渐减少
+      - 大概知道 - 可能还要维护一些比较老的项目
+
+    - 学习zepto
+      - 下载，引入
+        - 下载的时候，如果有js文件最好，如果没有，要懂得把人家的代码复制下来，自己准备一个js进行保存
+        - 引入要保证在使用之前引入
+      - 看API学习它有哪些功能，如何使用
+        - zepto的用法和我们后天要学习的jquery使用方法是一样的，所以只要后天学会了如何使用jquery，再学习zepto是非常简单的
+        - zepto 里面获取元素
+          $(选择器) 返回值是一个伪数组
+        - zepto 里面的注册事件
+          伪数组.on(事件类型,处理程序)
+        - zepto 里面修改样式
+          伪数组.css(属性名,属性值);
+        - 别的api就需要一点一点看了
+
+*/
+
+/* 点击div，把它的背景颜色变红 */
+// 获取元素
+let box =$('.box');
+// console.log(box);
+// 注册事件
+box.on('click',function(){
+  // console.log(123);
+  // 改样式
+  box.css('backgroundColor','green');
+});
+
+</script>
+</html>

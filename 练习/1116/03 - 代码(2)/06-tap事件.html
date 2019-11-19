@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 40vw; /* v viewport w width 指的是视口的宽度 把视口分成100份，给多事少vw 就是站100份里面的多杀份 */
+      height: 20vh; /* 新单位，也是把视口高度分成100份，给多少分，就是多高 */
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+<div class="box"></div>
+</body>
+<script src="./06-tap.js"></script>
+<script>
+/*
+  在移动端使用 点击事件 是可以的
+    但是是有问题的：
+      因为在移动端里面，有一个双击操作用于缩放页面的，只不过，现在有视口，就把这个操作屏蔽了
+
+      一定保证有视口吗？
+        - 移动端里面其实不管有没有视口，都会存在这样一个问题 ： 点击延迟效果
+        - 因为移动端 有一个操作是双击 ， 当你单击的时候，会等待一小会儿，就造成一个延迟 —— 但是这个效果在谷歌的模拟器里面是模拟不出来的，只能大家自己以后在开发里面遇到
+        - 延迟了的单击操作对用户体验不友好
+        - 在移动端一般不会使用鼠标的事件，一般使用触摸来模拟 点击操作
+  - 如果要注册点击事件
+  - 不会使用 click 事件，需要我们自己模拟一个 tap 事件      tap - 轻击
+  - 这个事件js里面没有封装
+
+  ————————————————————————————————————————————————————
+  开始思考，怎么模拟tap事件
+  必要条件：
+    1. 触摸的时间比较短 通常是250ms左右 视使用群体而定
+    2. 单指操作
+    3. 保证按下的点和松开的点位置差别不大
+*/
+// let box = document.querySelector('.box');
+// box.onclick = function(){
+//   console.log('点击事件');
+// }
+
+
+// 模拟轻击操作
+/*
+思路：
+  1. 在触摸开始和触摸结束的时候，都判断一下，是否是单指操作 - 触摸点的集合长度是1
+  2. 在触摸开始的时候，记录触摸的时间，当触摸结束，再次记录时间，相减之后判断
+  3. 在触摸开始的时候，记录触摸的位置，当触摸结束，再次记录位置，相减之后在判断
+*/
+
+// 获取元素
+let box = document.querySelector('.box');
+
+
+// tap(box,250,50,function(){
+//   alert('你好哦');
+// })
+
+tap(box,function(){
+  location.href = 'http://www.baidu.com'
+})
+
+
+</script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html {
+      font-size: 37.5px;
+    }
+    .box {
+      width: 4rem;
+      height: 4rem;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+<div class="box"></div>
+</body>
+<script>
+/*
+  在pc端，使用鼠标和键盘比较多
+  但是在移动端，使用手指操作比较多 —— 移动端的事件，使用鼠标和键盘很少了
+  如果要在移动端做交互，就需要使用触摸(touch)事件
+
+    移动端常用的触摸事件
+      开始触摸  - touchstart - 指手指开始接触到元素或者屏幕的时候触发
+      触摸移动  - touchmove - 手指触摸到了屏幕，位置发生变化
+      触摸结束  - touchend - 手指离开了屏或者是元素
+
+    所有的触摸事件，必须是以触摸的方式触发的，一般只会在移动端实现
+    移动端注册事件，不推荐使用on的方式注册，推荐使用addEventListener
+      - 移动端使用的技术一般比较新，不会太过考虑兼容的问题
+      - 如果有一些事件，人家没有封装到on里面，使用on的方式注册就不成功，所以推荐使用addEventListener的方式
+*/
+
+
+// 演示三个触摸事件
+let box = document.querySelector('.box');
+// box.ontouchstart = function(){
+//   console.log(123);
+// }
+// box.ontouchmove = function(){
+//   console.log(456);
+// }
+// box.ontouchend= function(){
+//   console.log(789);
+// }
+
+// 推荐使用addEventListener的方式注册
+box.addEventListener('touchstart',function(){
+  console.log(123);
+})
+</script>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 450px;
+            height: 450px;
+            border: 1px solid #aaa;
+            position: relative;
+            top: 100px;
+            left: 100px;
+        }
+
+        .small {
+            width: 450px;
+            height: 450px;
+            position: absolute;
+        }
+
+        .mask {
+            position: absolute;
+            background-color: rgba(255, 255, 0, .3);
+            width: 225px;
+            height: 225px;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        .big {
+            width: 450px;
+            height: 450px;
+            border: 1px solid #aaa;
+            position: absolute;
+            left: 500px;
+            top: 0;
+            overflow: hidden;
+            display: none;
+        }
+
+        .big>img {
+            width: 900px;
+            height: 900px;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="small">
+            <img src="./images/s.jpg" alt="">
+            <div class="mask"></div>
+        </div>
+        <div class="big">
+            <img src="./images/big.jpg" alt="">
+        </div>
+    </div>
+</body>
+<script>
+    let small = document.querySelector('.small');
+    let box = document.querySelector('.box');
+    let mask = document.querySelector('.mask');
+    let big = document.querySelector('.big');
+    let bigImg = document.querySelector('.big > img ');
+
+    /*1 鼠标移入出 */
+    small.onmouseover = function () {
+        /* 显示遮罩 */
+        mask.style.display = 'block';
+        /* 显示大图 */
+        big.style.display = 'block';
+    }
+    /*2 移出 */
+    small.onmouseout = function () {
+        mask.style.display = 'none';
+
+        big.style.display = 'none';
+    }
+    /* 鼠标在小图上面移动 */
+
+    /* 3.1 黄色遮罩跟着移动 */
+    small.onmousemove = function(e){
+  //控制黄色的遮罩随着鼠标的移动而移动
+  // 先获取鼠标的坐标
+  let mx = e.pageX;
+  let my = e.pageY;
+  // 经过计算，设置给黄色遮罩
+  // 黄色遮罩的位置 = 鼠标位置 - box距离body的左上角的距离 - mask宽高的一半
+  let x = mx - box.offsetLeft - mask.offsetWidth / 2;
+  let y = my - box.offsetTop - mask.offsetHeight / 2;
+  // 要让遮罩不能跑出小盒子的范围
+ 
+  // 设置给黄色遮罩
+  mask.style.top = y + 'px';
+  mask.style.left = x + 'px';
+
+  // 让大图随着鼠标的移动而移动
+  // 我们通过画图分析
+  // 大图的位置 = 大图的最大移动距离 * 遮罩的当前位置 / 遮罩的最大移动距离
+
+  
+}
+</script>
+
+
+</html>

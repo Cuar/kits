@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 450px;
+            height: 450px;
+            border: 1px solid #aaa;
+            position: relative;
+            top: 100px;
+            left: 100px;
+        }
+
+        .small {
+            width: 450px;
+            height: 450px;
+            position: absolute;
+        }
+
+        .mask {
+            position: absolute;
+            background-color: rgba(255, 255, 0, .3);
+            width: 225px;
+            height: 225px;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        .big {
+            width: 450px;
+            height: 450px;
+            border: 1px solid #aaa;
+            position: absolute;
+            left: 500px;
+            top: 0;
+            overflow: hidden;
+            display: none;
+        }
+
+        .big>img {
+            width: 900px;
+            height: 900px;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="small">
+            <img src="./images/s.jpg" alt="">
+            <div class="mask"></div>
+        </div>
+        <div class="big">
+            <img src="./images/big.jpg" alt="">
+        </div>
+    </div>
+</body>
+<script>
+    let small = document.querySelector('.small');
+    let big = document.querySelector('.big');
+    let mask = document.querySelector('.mask');
+    let box = document.querySelector('.box');
+    let bigImg = document.querySelector('.big > img');
+
+    /* 效果：
+    1. 鼠标移入小图
+      - 大图容器会显示
+      - 黄色的遮罩会显示 */
+
+    // 先实现鼠标的移入和移出
+    small.onmouseover = function () {
+        /* 大图 */
+        big.style.display = 'block';
+        /* 小图遮罩 */
+        mask.style.display = 'block';
+    }
+    small.onmouseout = function () {
+        /* 大图 */
+        big.style.display = 'none';
+        /* 小图遮罩 */
+        mask.style.display = 'none';
+    }
+
+    /*  2. 鼠标移出小图
+     - 大图容器和黄色遮罩都会隐藏 */
+    /* 控制黄色遮罩
+      实现1 先获取鼠标坐标
+          计算给黄色遮罩
+    */
+
+    // 实现鼠标在小图上移动的效果
+    small.onmousemove = function (e) {
+        let mx = e.pageX;
+        let my = e.pageY;
+        // 黄色遮罩的位置 = 鼠标位置 - box距离body的左上角的距离 - mask宽高的一半
+        let x = mx - box.offsetLeft - mask.offsetWidth / 2;
+        let y = my - box.offsetTop - mask.offsetHeight / 2;
+        
+        if (x <= 0) {
+            x = 0;
+        }
+        y = y <= 0 ? 0 : y;
+        // 最大的移动距离
+        let maxX = small.offsetWidth - mask.offsetWidth;
+        let maxY = small.offsetHeight - mask.offsetHeight;
+
+        /* 黄色遮罩位置  */
+        x = x >= maxX ? maxX : x;
+        y = y >= maxY ? maxY : y;
+        // 设置给黄色遮罩
+        mask.style.top = y + 'px';
+        mask.style.left = x + 'px';
+
+        // 先求出大图的最大移动距离 = 大图的宽高 - 大盒子的宽高
+        let bigImgMaxX = bigImg.offsetWidth - big.offsetWidth;
+        let bigImgMaxY = bigImg.offsetHeight - big.offsetHeight;
+
+        let bigImgX = bigImgMaxX * x / maxX;
+        let bigImgY = bigImgMaxY * y / maxY;
+
+        bigImg.style.top = -bigImgY + 'px';
+        bigImg.style.left = -bigImgX + 'px';
+    }
+</script>
+
+</html>
