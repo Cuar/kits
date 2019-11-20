@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="button" value="按钮" id="btn">
+<ul>
+  <li>我是第1个li</li>
+  <li>我是第2个li</li>
+  <li>我是第3个li</li>
+</ul>
+</body>
+<script src="./jquery/jquery-2.2.2.js"></script>
+<script>
+/*
+  jq中用于添加元素的方式
+    append
+      jq对象.append(子元素);
+    appendTo
+      子元素jq对象.appendTo(父元素jq对象)
+      子元素jq对象.appendTo(父元素选择器)
+
+      上面两个都是把子元素放在后面
+
+  把元素放在父元素的前面座位子元素
+    prepend
+      父元素jq对象.prepend(子元素jq对象);
+    prependTo
+      子元素jq对象.prependTo(父元素jq对象);
+
+  把元素放在中间
+    before
+      把一个元素放到另一个元素的前面
+        已经在结构中的jq对象.before(另一个元素的jq对象);
+    after
+      把一个元素放到另一个元素的后面
+*/
+// $('#btn').on('click',function(){
+//   let li = $('<li>新来的</li>');
+//   // 通过子元素找父元素
+//   // li.appendTo($('ul'));
+//   li.appendTo('ul');
+// })
+
+// $("#btn").on('click',function(){
+//   let li = $('<li>新来的</li>');
+//   $('ul').prepend(li);
+// })
+
+// $("#btn").on('click',function(){
+//   let li = $('<li>新来的</li>');
+//   // 把新生成的li放到 第三个li的前面
+//   $('li:nth-child(3)').before(li);
+// })
+
+
+// 上面所有添加子元素的方法，都可以解析html格式的字符串
+let str = '<li>abc</li>';
+$('ul').append(str);
+// jq里面为什么说使用起来非常方便，因为它的参数非常的灵活
+</script>
+</html>

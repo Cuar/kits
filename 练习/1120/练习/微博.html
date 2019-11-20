@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>微博发布效果</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .weibo {
+        width: 600px;
+        border: 1px solid #ccc;
+
+        margin: 100px auto;
+        padding: 10px;
+      }
+
+      .weibo-text {
+        width: 590px;
+        height: 140px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        outline: none;
+        resize: none;
+      }
+
+      .weibo-text:focus {
+        border-color: #f60;
+      }
+
+      .weibo-btn {
+        width: 80px;
+        height: 30px;
+        background-color: #f90;
+        color: #fff;
+        border: 0 none;
+        margin-top: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+        outline: 0 none;
+      }
+
+      .weibo-list {
+        padding-top: 10px;
+      }
+
+      .weibo-list li {
+        font-size: 14px;
+        line-height: 30px;
+        border-bottom: 1px dotted #ccc;
+        overflow: hidden;
+      }
+
+      .weibo-list li p {
+        float: left;
+      }
+
+      .weibo-list li span {
+        float: right;
+        cursor: pointer;
+      }
+
+      .weibo-list li input {
+        height: 24px;
+        line-height: 24px;
+        width: 300px;
+        font-size: 14px;
+        border: 0 none;
+      }
+
+      .time {
+        margin-right: 10px;
+        font-style: normal;
+        float: right;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="weibo">
+      <textarea class="weibo-text"></textarea>
+      <input class="weibo-btn" value="发布" type="button" />
+      <ul class="weibo-list">
+        <!-- <li>
+            <p class="content">快来收了这九款用上就停不下来的应用吧！！</p>
+            <span class="time"></span>
+            <span class="del">删除</span>
+        </li> -->
+      </ul>
+    </div>
+  </body>
+  <script src="./kits.js"></script>
+  <script>
+    let text = document.querySelector(".weibo-text");
+    let btn = document.querySelector(".weibo-btn");
+    let ul = document.querySelector(".weibo-list");
+
+    //遍历数组
+    let data = localStorage.querySelector("weibo-text");
+    let arr = !data ? [] : JSON.parse(data);
+
+    arr.foreach(function(e) {
+      let li = document.createElement("li");
+      /* 调用时间函数 */
+      let time = FormData();
+
+      li.innerHTML =
+        '<p class="content">' +
+        e.content +
+        '</p><span data-id="' +
+        e.id +
+        '" class="del">删除</span><em class="time">' +
+        e.time +
+        "</em>";
+
+      let first = ul.children[0];
+      ul.insertBefore(li.first);
+    });
+
+    // 注册事件
+    btn.onclick = function() {
+      let content = text.value;
+
+      let li = document.createElement("li");
+
+      let time = FormData();
+
+      let id = 0;
+      arr.forEach(function(e) {
+        if (id < e.id) {
+          id = e.id;
+        }
+      });
+      id++;
+
+      li.innerHTML = '<p class="content">' + content + '</p><span data-id="'+ id +'" class="del">删除</span><em class="time">' + time + '</em>';
+
+      let first = ul.children[0];
+    ul.insertBefore(li, first);
+    // 清空文本域
+    text.value = '';
+
+
+    let obj = {
+      id:id,
+      content: content,
+      time: time
+    };
+    // 把数据存到数组里面，然后把数组存储到localStorage
+    arr.push(obj);
+    // 把数组存储到本地
+    // 先把数组转换为json格式
+    let json = JSON.stringify(arr);
+    // console.log(json);
+    localStorage.setItem('wbshuju', json);
+    };
+
+
+  </script>
+</html>

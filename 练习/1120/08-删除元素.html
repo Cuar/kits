@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="button" value="删除" id="btn">
+<ul>
+  <li>我是第1个li</li>
+  <li>我是第2个li</li>
+  <li>我是第3个li</li>
+  <li>我是第4个li</li>
+  <li>我是第5个li</li>
+
+</ul>
+</body>
+<script src="./jquery/jquery-2.2.2.js"></script>
+<script>
+  /*
+    jq里面要删除元素
+
+      jq对象.remove()
+
+        把伪数组里面的所有的元素都从结构里面移除
+  */
+  // 点击按钮，把ul的第一个子元素删除
+  $('#btn').on('click',function(){
+    // 把ul的第一个子元素删除
+    // $('ul').children().eq(0).remove();
+
+    // 如果想要一次性全部删掉
+    // $('li').remove(); // 可以，但是效率稍微低一点
+    // $('ul').empty(); // 这个方式和上面的用法是一样的 ，作用是清空所有的子元素
+    // 如果要全都删除
+    $('ul').html(''); // 效率更高
+  })
+</script>
+</html>

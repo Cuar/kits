@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style: none;
+            width: 410px;
+            margin: 0 auto;
+        }
+        li {
+            float: left;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: relative;
+            background-color: #0a0;
+        }
+        li>.child {
+            width: 20px;
+            height: 300px;
+            border-radius: 4px;
+            position: absolute;
+            top: 99px;
+            left: 40px;
+            display: none;
+            background-image: linear-gradient(pink,#0094ff,#aa3764);
+        }
+    </style>
+ 
+</head>
+<body>
+    <div style="text-align: center;">
+        <div>效果要求：</div>
+        <div>在鼠标移动到每个圆上面的时候，修改其背景颜色，同时显示其子元素div，鼠标离开时背景恢复原状，并隐藏起子元素div</div>
+    </div>
+    <div class="container">
+        <ul>
+            <li>
+                <div class="child"></div>
+            </li>
+            <li>
+                <div class="child"></div>
+            </li>
+            <li>
+                <div class="child"></div>
+            </li>
+            <li>
+                <div class="child"></div>
+            </li>
+        </ul>
+    </div>
+
+</body>
+<script src="../jquery/jquery-2.2.2.js"></script>
+<script >
+    $(window).ready(function(){
+        $(' .container li').on('mouseover',function(){
+            $(this).css("background-color","pink").children().stop().slideDown(5000);
+        }).on('mouseout',function(){
+            $(this).css("background-color","").children().stop().slideUp(500);
+        })
+    })
+</script>
+</html>

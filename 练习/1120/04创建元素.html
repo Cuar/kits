@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="button" value="按钮" id="btn">
+  <input type="button" value="按钮2" id="btn2">
+<ul>
+  <li>我是第1个li</li>
+  <li>我是第2个li</li>
+  <li>我是第3个li</li>
+</ul>
+</body>
+<script src="./jquery/jquery-2.2.2.js"></script>
+<script>
+/*
+  DOM 里面的创建元素
+    innerHTML
+    document.createElement()
+
+  jq里面的创建元素的方式
+    jq对象.html(满足html格式的字符串)
+      会把html格式的字符串，解析为技巧对象里面的元素的子元素
+
+    $('满足html格式的字符串')
+      这个方式创建的元素不会自动添加到结构中，需要手动添加
+
+        使用 jq对象.append(子元素) 这个方法添加子元素
+*/
+
+// 点击按钮，向ul里面创建一个新的li
+$('#btn').on('click',function(){
+  $('ul').html('<li>新来的</li>');
+})
+
+// 点击按钮2的时候，可以给ul添加一些新的子元素，而不是把之前覆盖
+$('#btn2').on('click',function(){
+  let li = $('<li>我是新来的</li>');
+  // console.log(li);
+  $('ul').append(li);
+})
+</script>
+</html>

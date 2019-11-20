@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .wrap {
+            width: 300px;
+            margin: 100px auto 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid #c0c0c0;
+        }
+
+        th,
+        td {
+            border: 1px solid #d0d0d0;
+            color: #404060;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #09c;
+            font: bold 16px "微软雅黑";
+            color: #fff;
+        }
+
+        td {
+            font: 14px "微软雅黑";
+        }
+
+        tbody tr {
+            background-color: #f0f0f0;
+        }
+
+        tbody tr:hover {
+            cursor: pointer;
+            background-color: #fafafa;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" id="j_cbAll"/>
+                </th>
+                <th>课程名称</th>
+                <th>所属学院</th>
+            </tr>
+        </thead>
+        <tbody id="j_tb">
+            <tr>
+                <td>
+                    <input type="checkbox"/>
+                </td>
+                <td>JavaScript</td>
+                <td>前端与移动开发学院</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox"/>
+                </td>
+                <td>css</td>
+                <td>前端与移动开发学院</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox"/>
+                </td>
+                <td>html</td>
+                <td>前端与移动开发学院</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox"/>
+                </td>
+                <td>jQuery</td>
+                <td>前端与移动开发学院</td>
+            </tr>
+            <!--<tr>
+                <td><input type="checkbox"/></td>
+                <td>HTML5</td>
+                <td>前端与移动开发学院</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"/></td>
+                <td>CSS3</td>
+                <td>前端与移动开发学院</td>
+            </tr>-->
+        </tbody>
+    </table>
+</div>
+</body>
+<script src="./jquery/jquery-2.2.2.js"></script>
+<script>
+  /*
+    1. 点击全选，让底下每一个单选都和全选一样
+    2. 点击单选，如果单选全都选中了，就把全选也选中，否则全选就不选中
+  */
+// jq里面获取元素，如果有一个式子多次获取，也是可以作为一个变量先存储起来的
+let cks = $('#j_tb input');
+let ckall = $('#j_cbAll');
+// 全选
+ckall.on('click',function(){
+  // 得到当前这个全选是否是勾选的
+  let status = $(this).prop('checked');
+  // 设置每个单选和全选的状态一样就行了
+  cks.prop('checked',status);
+})
+
+// 单选
+cks.on('click',function(){
+  // 可以使用反证法来实现
+  // 1 假设全都选中了
+  let flag = true;
+  // 2 尝试找到反例 - 只要有一个没有被勾选，就是没有全选
+  // 遍历伪数组，看看是否都是勾选的
+  for(let i = 0; i < cks.length; i++){
+    // 找没有被勾选的
+    // if(某个的checked属性是false){
+    if(cks.eq(i).prop('checked') === false){
+      // 把假设推翻
+      flag = false;
+      break;
+    }
+  }
+  // 3 再次判断假设是否仍然成立
+  // if(flag){
+  //   // 让全选是勾选的
+  //   ckall.prop('checked',true);
+  // }else{
+  //   // 让全选是不勾选
+  //   ckall.prop('checked',false);
+  // }
+  ckall.prop('checked',flag);
+})
+</script>
+</html>

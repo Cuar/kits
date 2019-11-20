@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  学会如何使用
+    引入 , 要在使用之前引入 ， 没引入会报错 $ is not defined
+    script 自己的
+    入口函数，在入口函数里面写代码
+    - 入口函数不是必须的
+  入口函数 顶级对象
+    作用
+      - 保证在元素有了之后在获取，保证获取的成功率
+      - 把变量都变成局部变量 - 防止全局污染
+      - 执行时机 ： dom树构建完毕
+    $ === jQuery 顶级对象
+
+  获取元素
+    基本选择器
+      $(css选择器);  - 返回值是一个伪数组、
+
+    父元素
+      jq对象.parent();
+    子元素
+      jq对象.children(筛选的选择器);
+    兄弟元素
+      jq对象.siblings(筛选);
+    根据索引获取某个元素，包装成伪数组
+      $(jq对象[i]);
+      jq对象.eq(索引);
+
+  注册事件
+    伪数组.on(事件类型,处理程序)
+  修改样式
+    行内样式
+      css方法
+        jq对象.css(键，值);
+        jq对象.css({
+          键：值,
+          键:值
+        });
+    类样式
+        jq对象.addClass(类名);
+        jq对象.removeClass(类名);
+        jq对象.toggleClass(类名);
+          h5里面提供的classList就是从这里吸收的思想新增的
+  链式编程
+    在点了一个方法之后，继续点方法
+      jq中，很多方法的返回值都是调用该方法的对象，如果返回值是对象，就可以继续调用方法
+
+    写起来更简单，调试不方便，后期维护也不方便
+    想要调试方便，就不要使用链式编程，一步一步的把过程实现，再来调试
+    调试的时候，不要点f11了，因为点击f11会逐步执行，会进入到jquery里面调试，很难在出来
+    现在调试不要点f11,点f10或者点f8
+
+  动画效果
+    自定义动画
+      jq对象.animate({css属性:目标值},持续时间,结束的回调函数);
+    封装好的三个动画
+      slideDown()/slideUp()/slideToggle()
+      fadeIn()/fadeOut()/fadeToggle() / fadeTo()
+      show()/hide()/toggle();
+*/
+</script>
+</html>

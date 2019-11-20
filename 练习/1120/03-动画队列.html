@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: green;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <input type="button" value="开始" id="btn1">
+  <input type="button" value="停止" id="btn2">
+<div class="box"></div>
+</body>
+<script src="./jquery/jquery-2.2.2.js"></script>
+<script>
+  /* 队列
+      - 排队
+      - 先进先出
+      - 在jq里面，为了实现把所有动画都实现，做了一个动画的队列
+      - 必须等待前面的动画执行完毕，下一个动画才会执行
+    - 什么情况下会形成动画队列
+      - 上一个动画没有执行完毕，就有下一个动画等待执行
+
+    有时候动画队列的效果不是我们想要的
+      - jq里面也提供了打断动画队列的方法
+      - jq对象.stop();
+
+    用法
+      jq对象.stop(是否清空动画队列,是否立刻到达动画结束的位置);
+   */
+
+// 点击按钮1，让div先变大，然后在向右移动，然后再变小，再向左移动
+$('#btn1').on('click',function(){
+  $('.box')
+  .animate({width:300,height:300},3000)
+  .animate({left:600},3000)
+  .animate({width:100,height:100},3000)
+  .animate({left:0},3000);
+})
+
+// 点击btn2的时候，执行stop函数，停止动画
+$('#btn2').on('click',function(){
+  // 两个参数都是true的情况
+  // $('.box').stop(true,true); //没有了后续的动画，会立刻到达当前动画的结束位置
+  // 其中一个是true
+  // $('.box').stop(true,false); //没有了后续的动画，不会到达当前动画的结束位置，当时是什么状态，就停止在哪里
+
+  // $('.box').stop(false,true); // 有后续动画，并且会立刻到达当时的结束的位置
+
+  // $('.box').stop(false,false); // 有后续动画，但是不会到达当前的结束位置
+})
+</script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<input type="text" id="txt">
+<div><a href="#">小明和小刚</a></div>
+<p>123</p>
+<h1>456</h1>
+</body>
+<script src="./jquery/jquery-2.2.2.js"></script>
+<script>
+/*
+  操作表单元素的内容
+    input,textarea..
+
+      jq对象.val(参数);
+        如果传递了参数，是设置内容，如果没有传递参数，是获取内容
+  操作非表单元素的内容
+    div,p,span
+      jq对象.html(参数);
+      jq对象.text(参数);
+        如果传递了参数，是设置内容，如果没有传递参数，是获取内容
+
+        如果和结构相关的操作，使用html方法
+        如果仅仅是操作文本，使用text方法
+*/
+$('#txt').on('blur',function(){
+  console.log(this.value);
+  console.log($(this).val());
+})
+
+$('#txt').on('focus',function(){
+  $(this).val('你好');
+})
+
+// 点击div的时候获取div的内容
+// html()/text()
+$('div').on('click',function(){
+  console.log($(this).html()); // 操作包含html结构的
+  console.log($(this).text()); // 只操作文本
+})
+
+// 点击p标签的时候，使用html方法修改内容
+$('p').on('click',function(){
+  $(this).html('<a href="#">小明和小刚</a>');
+})
+// 点击h1使用text方法修改内容
+$('h1').on('click',function(){
+  $(this).text('<a href="#">小明和小刚</a>'); // 是不会解析字符串的，不会创建元素
+})
+</script>
+</html>
