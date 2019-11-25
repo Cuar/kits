@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  js里面进行面向对象封装的时候，都是使用原型的方式实现的
+  原型
+    - 什么是原型
+      - 是一个对象，该对象可以通过  构造函数.prototype  这个属性访问
+    - 能干嘛
+      - 可以给构造函数的实例对象共享方法
+    - 怎么用
+      - 在构造函数的原型上写方法，方法就可以被实例对象所使用
+*/
+function Person(name,age,gender){
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+}
+// 把方法写到原型对象身上
+Person.prototype.sayHi = function(){
+  console.log('你好');
+}
+
+// 验证sayHi能否被调用
+let gd = new Person('狗蛋',12,'男');
+// console.log(gd);
+// 目前看不出 狗蛋(实例对象) 和 原型的关系
+// 检查实例对象身上，它的身上除了我们定义的属性，自带一个 __proto__ 属性，展开一看有sayHi方法，sayHi方法明明是我们写在 Person.prototype 身上
+// 猜测， Person.prototype 就是  __proto__
+// console.dir(Person);
+// console.log(gd);
+console.log(Person.prototype === gd.__proto__);
+</script>
+</html>

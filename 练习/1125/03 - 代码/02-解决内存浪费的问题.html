@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  因为new的时候，构造函数里的代码会重新执行，导致声明函数的代码执行多次，所以才会在内存中有多个一模一样的函数
+   - 只要把函数放到外部，只执行一次
+*/
+function fn(){
+  console.log(this.name);
+}
+
+function Person(name,age,gender){
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+  this.sayHi = fn;
+}
+
+var gd = new Person('狗蛋',12,'男');
+var ch = new Person('翠花',13,'女');
+gd.sayHi();
+ch.sayHi();
+console.log(gd.sayHi === ch.sayHi);
+/*
+  但是这个方式，看不出fn和Person有什么关系， 阅读代码的时候，整体性是很差的
+*/
+
+</script>
+</html>

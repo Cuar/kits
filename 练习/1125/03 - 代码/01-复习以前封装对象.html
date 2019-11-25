@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  以前描述人：
+    特征： 名字、年龄、性别、身高
+    行为： 吃饭、打招呼
+*/
+// var obj = {};
+// obj.name = '狗蛋';
+// obj.age = 12;
+// obj.gender =  '男';
+// obj.height = 166;
+// obj.eat = function(){}
+// obj.sayHi = function(){
+//   console.log('你好');
+// }
+
+/*
+  如果要描述多个人，就需要把上面的代码写很多次 —— 太麻烦了
+    - 自定义构造函数
+*/
+function Person(name,age,gender,height){
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+  this.height = height;
+  this.eat = function(){ console.log('噜噜噜噜'); }
+  this.sayHi = function(){ console.log('hello'); }
+}
+var gd = new Person('狗蛋',12,'男',166);
+// console.log(gd);
+var ch = new Person('翠花',13,'女',176);
+// console.log(ch);
+/*
+  上面的使用构造函数封装对象的方式是行的，但是这个方式有一个问题：
+    当我们大量的创建人这种对象的时候会浪费内存
+*/
+// gd.sayHi();
+// ch.sayHi();
+console.log(gd.sayHi);
+console.log(ch.sayHi);
+console.log(gd.sayHi === ch.sayHi)
+
+</script>
+</html>

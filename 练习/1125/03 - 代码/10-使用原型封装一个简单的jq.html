@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 40px;
+      background-color: red;
+      margin-right: 10px;
+      float: left;
+    }
+    .box:nth-child(2){
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+</body>
+<script src="./11-jquery.my.js"></script>
+<script>
+/*
+使用原型的方式封装一个简单的jq
+  - jq的基本功能
+    - 选择器 - 获取元素
+      $(选择器)
+    - 注册事件
+      jq对象.on(事件类型,处理程序)
+    - 修改样式
+      jq对象.css(键,值);
+      jq对象.css({键:值});
+
+      jq对象.addClass();
+      jq对象.removeClass();
+      jq对象.toggleClass();
+    - 修改属性
+      jq对象.attr()
+      jq对象.prop()
+*/
+let box = $('.box');
+
+
+
+</script>
+</html>

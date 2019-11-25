@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+原型
+  - 什么是原型
+    - 一个对象，通过构造 函数.prototype 获取
+  - 有什么用
+    - 可以给实例对象共享成员(方法和属性)
+  - 怎么用
+    - 在构造函数里面写属性
+    - 在原型对象上面写方法
+原型链
+  - 多个原型组成的链式关系，就是原型链
+  - 依赖于 原型对象.__proto__ 这个关系
+  - 原型链上游的方法，可以被下游的实例对象所共享 —— 实现代码的重复使用 —— 继承
+
+  - 成员的访问规则
+    -1. 如果我自己有，用自己的
+    -2. 如果我没有，往原型链上游查找，找到一个离我最近的
+    -3. 如果原型链上面也没有，返回undefined
+
+继承
+  - 什么是继承
+    - 父类的成员可以被子类所共享
+      - 父类 - 一个较大的分类
+      - 子类 - 一个大分类里面分出来的小分类
+  - 有什么用
+    - 写过的代码，可以重复使用
+    - 降低代码的冗余度
+  - 怎么做
+    -1. 借用构造函数实现属性的复用
+      大分类的构造函数.call(this,大分类构造函数所需的参数一一传递)
+
+    -2. 使用原型链的方式实现方法的继承
+      小分类构造函数.prototype = new 大分类构造函数();
+*/
+
+function Person(name,age){
+  this.name = name;
+  this.age = age;
+}
+Person.prototype.sayHi = function(){
+  console.log('你好');
+}
+// 使用实例对象调用函数
+// let gd = new Person('狗蛋',12);
+// gd.sayHi();
+
+// 观察内置对象
+// Date/Array/String 都是把方法写在原型对象上面的
+// console.dir(Array);
+// console.dir(Date);
+
+// 一家三口
+// console.dir(Person);
+// console.log(Person.prototype.constructor === Person);
+// let gd = new Person('狗蛋',12);
+// console.dir(gd);
+// console.log(Person.prototype === gd.__proto__);
+
+// 研究原型
+// console.log(Person.prototype);
+// console.log(Person.prototype.__proto__.constructor === Object);
+// console.log(Person.prototype instanceof Object);
+
+// instanceof
+// instanceof 作用是判断某个对象是否是构造函数的实例
+// let arr = new Array();
+// let date = new Date();
+// console.log(arr instanceof Array); // arr是Array的实例对象
+// console.log(date instanceof Array); // date不是有Arraynew的
+
+// 研究原型的原型
+// console.log(Person.prototype.__proto__.__proto__);
+
+
+// 实现继承
+// 借用构造函数实现属性的继承
+function Student(name,age){
+  Person.call(this,name,age); // call作用就是调用函数以及修改函数的this
+}
+// 修改原型链，实现方法的继承
+Student.prototype = new Person();
+Student.prototype.constructor = Student;
+
+let s1 = new Student('翠花',13);
+console.log(s1);
+// s1.sayHi();
+
+
+</script>
+</html>

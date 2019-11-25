@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  实现  从 人类  到  学生的继承
+    1. 使用借用构造函数实现 属性 继承
+*/
+
+// 有一个人类的大分类
+function Person(name,age){
+  this.name = name;
+  this.age = age;
+}
+// 给原型对象添加一个方法
+Person.prototype.sayHi = function(){
+  console.log('你好，我叫'+this.name);
+}
+// 有一个小分类 学生
+function Student(name,age,gender){
+  // 借用构造函数实现属性的继承
+  Person.call(this,name,age);
+  // this.name = name;
+  // this.age = age;
+  this.gender = gender;
+}
+// 把小分类的原型修改为大分类的实例对象
+Student.prototype = new Person();
+// console.log(Student.prototype);
+// 发现这个写法Student的原型丢失了 constructor 属性，应该补回来
+Student.prototype.constructor = Student; // 把关系补全
+
+let s1 = new Student('李狗蛋',12,'男');
+console.log(s1);
+s1.sayHi();
+
+
+</script>
+</html>

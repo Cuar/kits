@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  call 是一个方法， 这个方法可以被 函数所调用
+    作用：
+      1. 调用指定的函数
+      2. 可以修改函数在执行的时候的this
+    用法：
+      函数名.call(函数的新this,函数参数1,函数的参数2...)
+*/
+
+// 验证call可以调用函数
+// function fn(){
+//   console.log(123);
+// }
+// // fn(); // 普通的调用方式
+// fn.call();
+
+
+// 验证call可以修改函数的this
+// function fn(){
+//   console.log(this);
+// }
+// // fn();// 普通调用
+// fn.call({name:'狗蛋'});
+
+// 讲解call的传参
+function fn(a,b){
+  console.log(a,b);
+}
+fn(10,20);
+fn.call({},100,200);
+</script>
+</html>

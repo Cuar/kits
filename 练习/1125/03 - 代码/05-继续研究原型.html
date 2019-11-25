@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+function Person(name,age,gender){
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+}
+// 把方法写到原型对象身上
+Person.prototype.sayHi = function(){
+  console.log('你好');
+}
+/* 把原型对象输出看看 */
+// console.dir(Person.prototype);
+// console.dir(Person);
+// console.log(Person === Person.prototype.constructor);
+
+// 输出一个实例对象
+let gd = new Person('狗蛋',12,'男');
+// console.log(gd);
+
+// 猜测 Person的原型的原型的构造函数是Object
+// console.dir(Object);
+// console.log(Person.prototype.__proto__);
+// console.log(Object === Person.prototype.__proto__.constructor);
+
+
+/* 开始挖祖坟 - 研究原型的原型 */
+// console.log(Person.prototype.__proto__)
+// console.log(Person.prototype.__proto__.__proto__)
+
+/* 原型的方法可以被实例调用， Person.protype 是 Object 的实例， Object.prototype 上面的方法 讲道理是可以被  Person.prototype 使用的 */
+let result = Person.prototype.toString();
+console.log(result);
+
+/* 后代实例对象，能否调用  原型的原型的 方法 */
+let res = gd.toString();
+console.log(res);
+</script>
+</html>

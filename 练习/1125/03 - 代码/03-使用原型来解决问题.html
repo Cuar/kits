@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  在js里面，喜欢使用原型来封装对象
+
+    这次用到的  prototype 属性就是我们所说的原型
+*/
+
+// 构造函数里面只放属性
+function Person(name,age,gender){
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+}
+// 把方法写到原型对象身上
+Person.prototype.sayHi = function(){
+  console.log('你好');
+}
+
+// 验证sayHi能否被调用
+let gd = new Person('狗蛋',12,'男');
+let ch = new Person('翠花',13,'女');
+/* 看看两个实例对象身上有没哟sayHi方法 */
+console.log(gd);
+console.log(ch);
+// gd.sayHi();
+// ch.sayHi();
+// console.log(gd.sayHi === ch.sayHi);
+
+/*
+  假如一个对象身上没有这个属性或者方法，调用可能或出错的
+*/
+var obj = {};
+console.log(obj.name);
+obj.sayHi();
+</script>
+</html>
