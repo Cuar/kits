@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    class Person {
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+      sayHi(){
+          console.log("n m s l "+'你好,我叫'+this.name);
+      }
+    }
+
+    //继承
+    class Student extends Person{
+        constructor(name,age,gender){
+    super(name,age);
+    this.gender = gender;
+  }
+  run(){
+    console.log('速度七十迈');
+  }
+}
+    let s1 = new Student('狗蛋',12,'男');
+console.log(s1);
+s1.sayHi();
+
+  </script>
+</html>
