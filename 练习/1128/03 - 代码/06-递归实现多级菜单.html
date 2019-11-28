@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .main {
+      width: 1200px;
+      margin: 0 auto;
+    }
+
+    ul {
+      list-style: none;
+      max-width: 300px;
+      background-color: #000;
+      padding: 4px;
+    }
+
+    li {
+      margin-top: 4px;
+      padding-left: 10px;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px dashed #fff;
+      font-size: 24px;
+    }
+
+    a::before {
+      content: "☆"
+    }
+
+    .hide {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <div class="nav"></div>
+  </div>
+</body>
+<script>
+  let navData = [
+    { id: 1, text: '一级菜单A', parentId: null },
+    { id: 2, text: '一级菜单B', parentId: null },
+    { id: 3, text: '一级菜单C', parentId: null },
+    { id: 4, text: '二级菜单AA', parentId: 1 },
+    { id: 5, text: '二级菜单AB', parentId: 1 },
+    { id: 6, text: '二级菜单AC', parentId: 1 },
+    { id: 7, text: '二级菜单BA', parentId: 2 },
+    { id: 8, text: '二级菜单BB', parentId: 2 },
+    { id: 9, text: '二级菜单BC', parentId: 2 },
+    { id: 10, text: '二级菜单CA', parentId: 3 },
+    { id: 11, text: '二级菜单CB', parentId: 3 },
+    { id: 12, text: '二级菜单CC', parentId: 3 },
+    { id: 13, text: '三级菜单AAA', parentId: 4 },
+    { id: 14, text: '三级菜单BAA', parentId: 7 },
+    { id: 15, text: '三级菜单CAA', parentId: 10 }
+  ];
+
+  // 规律就是总是要判断自己的parentId是否等于另一个对象的id，如果等于，就把自己放到一个数组里面
+  function makeTree(arr, pId) {
+    let temp = [];
+    for (let i = 0; i < arr.length; i++) {
+      //一级菜单的parentId是null
+      if (arr[i].parentId === pId) {
+        temp.push(arr[i]);
+        // 生成二级、三级、四级。。。菜单
+        arr[i].children = makeTree(arr, arr[i].id);
+      }
+    }
+    return temp;
+  }
+
+  // 调用函数生成树形结构
+  let tree = makeTree(navData, null);
+  // console.log(tree);
+  // 2 根据树形结构把多级菜单动态生成
+
+  let nav = document.querySelector('.nav');
+
+  // 封装递归的函数生成结构
+  function makeElement(arr,parentNode) {
+    let ul1 = document.createElement('ul');
+    // ul一开始是隐藏的，使用hide类名隐藏
+    ul1.classList.add('hide');
+    for (let i = 0; i < arr.length; i++) {
+      let li = document.createElement('li');
+      li.innerHTML = `<a class="item" href="javascript:;">${arr[i].text}</a>`;
+      ul1.appendChild(li);
+      // 如果还有子级，就继续递归的调用生成
+      if(arr[i].children.length !== 0){
+        makeElement(arr[i].children,li);
+      }
+    }
+    parentNode.appendChild(ul1);
+  }
+
+// 递归生成菜单
+  makeElement(tree,nav);
+
+  // 把第一层的ul的hide类名去除
+  Array.prototype.forEach.call(nav.children,e => e.classList.remove('hide'));
+  // 需要点击li的时候，能够把对应的子级菜单收起或者展开
+  // li里面是a标签，此时点击的时候，我们点到的是a标签，而不是li，判断的应该是a标签
+  nav.addEventListener('click',function(e){
+    if(e.target.classList.contains('item')){
+      // 把它的下一个兄弟元素，显示或者隐藏 - 下一个兄弟元素是ul,通过hide这个class控制显示和隐藏
+      e.target.nextElementSibling.classList.toggle('hide');
+    }
+  })
+</script>
+
+</html>

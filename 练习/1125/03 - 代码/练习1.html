@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 构造函数里面只放属性
+      function Person(name, age, gender) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+      }
+
+      Person.prototype.sayHi =function(){
+          console.log('你好');
+      }
+      //验证调用
+      let gd =new Person();
+
+      console.log(gd);
+    </script>
+  </body>
+</html>

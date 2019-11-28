@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .main {
+      width: 900px;
+      margin: 50px auto;
+      display: flex;
+    }
+
+    .cell {
+      flex: 1;
+      text-align: center;
+      margin-right: 10px;
+    }
+    .contain {
+      min-height: 400px;
+    }
+    img {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <div class="cell">
+      <div class="contain">
+        <img src="./images/1.png" alt="">
+      </div>
+      <input type="button" value="我可以(0)">
+    </div>
+    <div class="cell">
+      <div class="contain">
+        <img src="./images/2.gif" alt="">
+      </div>
+      <input type="button" value="我可以
+      (0)">
+    </div>
+    <div class="cell">
+      <div class="contain">
+        <img src="./images/3.gif" alt="">
+      </div>
+      <input type="button" value="我可以(0)">
+    </div>
+  </div>
+</body>
+<script>
+function f1(){
+    let sum=0;
+    function f2(){
+        this.value='我可以(' + ++sum +') ';
+    }
+    return f2;
+}
+let  btn =document.querySelectorAll('input');
+    btn.forEach((function(e){
+        e.onclick =f1();
+    }));
+</script>
+</html>

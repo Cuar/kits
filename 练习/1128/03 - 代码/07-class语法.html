@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  封装对象
+    封装它的属性和方法
+  class语法里面的使用
+
+    class 类名{
+      constructor(特征1,特征2){
+        this.属性1 = 特征1;
+        this.属性2 = 特征2;
+        ...
+      }
+      方法1(){}
+      方法2(){}
+    }
+*/
+
+// 使用类的语法封装人类对象
+class Person{
+  // 类的构造函数
+  constructor(name,age){
+    this.name =name;
+    this.age = age;
+  }
+  // 封装类的方法
+  sayHi(){
+    console.log('你好，我叫'+this.name);
+  }
+}
+
+let gd = new Person('狗蛋',12);
+console.log(gd);
+</script>
+</html>

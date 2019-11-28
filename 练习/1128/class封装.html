@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .box {
+        width: 400px;
+        height: 400px;
+        border: 1px solid #000;
+        margin: 100px auto;
+        border-bottom: 0 none;
+      }
+      .row {
+        display: flex;
+        border-bottom: 1px solid #000;
+      }
+      .item {
+        width: 100px;
+        height: 40px;
+        border-right: 1px solid #000;
+        /* line-height: 40px;
+      text-align: center; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .content {
+        height: 357px;
+        flex: 0 0 100%;
+        display: none;
+      }
+      .active {
+        background-color: red;
+      }
+      .show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="row">
+        <div class="item active">影音</div>
+        <div class="item">书籍</div>
+        <div class="item">零食</div>
+      </div>
+      <div class="row">
+        <div class="content show">影音的内容</div>
+        <div class="content">书籍的内容</div>
+        <div class="content">零食的内容</div>
+      </div>
+    </div>
+  </body>
+  <script>
+    /* 功能  
+    
+    鼠标移入，切换成当前分类 的样式 ，切换当前分类对应内容
+    */
+    //获取元素
+    let items = document.querySelectorAll(".item");
+    let contents = document.querySelectorAll(".content");
+    //注册鼠标移入事件
+    items.forEach((e, i) => {
+      e.onmouseover = function() {
+        //为什么再循环一遍
+        items.forEach(e => {
+          e.classList.remove("active");
+        });
+        this.classList.add("active");
+
+        //对应显示内容
+        contents.forEach(e => {
+          e.classList.remove("show");
+        });
+        //[i] ?
+        contents[i].classList.add("show");
+      };
+    });
+
+    //切类名
+  </script>
+
+  <script>
+    // class封装
+
+    //写一个类
+    class Tab {
+      constructor(
+        temClass,
+        eventType,
+        itemActiveClass,
+        contentClass,
+        contentShowClass
+      ) {
+        this.itemClass = itemClass || ".item";
+        this.eventType = eventType || "mouseover";
+        this.itemActiveClass = itemActiveClass || "active";
+        this.contentClass = contentClass || ".content";
+        this.contentShowClass = contentShowClass || "show";
+        // 获取元素
+        this.items = document.querySelectorAll(this.itemClass);
+        this.contetns = document.querySelectorAll(this.contentClass);
+
+        //
+        this.addEvent();
+      }
+      //注册事件
+      addEvent() {
+        this.item.forEach((e, i) => {
+          //this.evenType 事件类型 变成参数 
+          //再写 执行函数
+          e.addEventListener(this.eventType, e => {
+            let target = e.target;
+            // 切换分类
+            this.changeItems(target);
+            // 切换内容
+            this.changeContent(i);
+          });
+        });
+      }
+      //切换tab
+      changeItems(current) {
+        this.items.forEach(e => {
+          e.classList.remove(this.itemActiveClass);
+        });
+        // 把点击的那一个变红
+        current.classList.add(this.itemActiveClass);
+      }
+      //切换内容 content
+      changeContent(index) {
+        //为什么加this
+        this.contents.forEach(e => {
+          e.classList.remove(this.contentShowClass);
+        });
+        this.contents[index].classList.add(this.contentShowClass);
+      }
+    }
+    let tab = new Tab();
+  </script>
+</html>

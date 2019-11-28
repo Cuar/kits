@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  如果已经有一个人家封装好的class，我们想要添加新的功能，一般不会在原来的class上面进行修改，我们可以把之前的代码重复使用，并且拓展自己的新的功能 —— 继承
+
+  es5里面实现继承 —— 非常复杂
+  es6里面推出一个新的语法来把这个问题解决
+    extends 关键字
+
+  用法：
+    class A exnteds B{
+      constructor(){
+        super();
+      }
+    }
+
+    注意： 子类里面的构造函数，一定要调用父类的构造函数 super 一次
+*/
+
+// 有一个人类的大分类
+class Person{
+  constructor(name,age){
+    this.name = name;
+    this.age = age;
+  }
+  sayHi(){
+    console.log('你好,我叫'+this.name);
+  }
+}
+
+// 分出一个小分类——学生
+class Student extends Person{
+  constructor(name,age,gender){
+    super(name,age);
+    this.gender = gender;
+  }
+  run(){
+    console.log('速度七十迈');
+  }
+}
+
+let s1 = new Student('狗蛋',12,'男');
+console.log(s1);
+s1.sayHi();
+</script>
+</html>

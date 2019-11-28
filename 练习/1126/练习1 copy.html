@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .main {
+      width: 900px;
+      margin: 50px auto;
+      display: flex;
+    }
+
+    .cell {
+      flex: 1;
+      text-align: center;
+      margin-right: 10px;
+    }
+    .contain {
+      min-height: 400px;
+    }
+    img {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <div class="cell">
+      <div class="contain">
+        <img src="./images/1.png" alt="">
+      </div>
+      <input type="button" value="我可以(0)">
+    </div>
+    <div class="cell">
+      <div class="contain">
+        <img src="./images/2.gif" alt="">
+      </div>
+      <input type="button" value="我可以
+      (0)">
+    </div>
+    <div class="cell">
+      <div class="contain">
+        <img src="./images/3.gif" alt="">
+      </div>
+      <input  type="button" value="我可以(0)">
+    </div>
+  </div>
+</body>
+<script>
+  //本地存储
+let btn =document.querySelectorAll('input');
+/* let btn =document.querySelectorAll('input'); */
+/* let btn1 =document.querySelector('.btn1'); */
+var tickes = 0;
+  let data = localStorage.getItem('number');
+
+  let arr =!data ? []:JSON.parse(data);
+
+
+
+
+
+btn.forEach(function(e,i){
+
+  e.onclick=function(){
+    this.value = '喜欢她(' + ++tickes + ')';
+  
+  let id = 0;
+    arr.forEach(function(e){
+      if(id < e.id){
+        id = e.id;
+      }
+    });
+    id++;
+
+  let obj = {
+    id:id ,
+    tickes:tickes
+    };
+    arr.push(obj);
+    let json = JSON.stringify(arr);
+    localStorage.setItem('number', json);
+  }
+});
+
+
+/* btn.onclick=function(){
+  this.value = '喜欢她(' + ++tickes + ')';
+  
+  let id = 0;
+    arr.forEach(function(e){
+      if(id < e.id){
+        id = e.id;
+      }
+    });
+    id++;
+
+  let obj = {
+    id:id ,
+    tickes:tickes
+    };
+    arr.push(obj);
+    let json = JSON.stringify(arr);
+    localStorage.setItem('number', json);
+}
+ */
+
+
+
+
+
+/*   btn.forEach(function (e) {
+    this.value = '喜欢她(' + ++tickes + ')';
+    console.log(123);
+  }); */
+</script>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+let o1 = {};
+let o2 = {
+  name : '狗蛋',
+  age : 12
+}
+// console.log(o1);
+// console.log(o2);
+// 把o2里面的每个键值对否复制一份到o1上面
+// for(let key in o2){
+//   o1[key] = o2[key]
+// }
+
+// Object.assign(目标对象,源对象) // 可以把源对象身上的键值对，复制一份到目标对象身上
+// console.log(o1);
+// console.log(o2);
+
+Object.assign(o1,o2);
+console.log(o1);
+</script>
+</html>
