@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+  <div id="box"></div>
+<body>
+  <!-- <input type="text" value="{{ value }}"> -->
+</body>
+<script>
+  /*
+    后期学习vue的时候，会学习一个 mvvm 的设计模式  - 里面实现了 双向数据绑定
+  */
+  // js里面会有一个数据和上面的value对象，当任何一个数据发生改变，另一个就会立刻也同步
+  // 原理就是使用  get  set  这两个函数，先教大家如何使用这两个函数
+
+  // console.log(Object.prototype);
+  // 最顶端的原型有一个 __proto__ 属性，就是利用获取器和设置器实现的
+  /*
+    获取器和设置在一个API里面
+      Object.defineProperty()
+
+    回忆一下 ： 以前学习过的 只读属性 —— 利用该API实现的
+
+    用法
+      Object.defineProperty(对象,属性名,描述方式)
+        描述符有
+          value - 设置属性的默认值
+          writable - 控制该属性是否可以修改
+          enumerable - 控制该属性是否可以被遍历
+          configurable - 控制该属性是否可以被delete操作符删除
+
+          get - 获取器 - 当你访问该属性的时候调用的函数 - value和get无法共存
+          set - 设置器 - 当你设置该属性的时候调用的函数
+  */
+
+  // 定义一个属性name无法被修改
+  // let obj = {};
+  // Object.defineProperty(obj,'name',{
+  //   value : 'name属性的默认值', // 设置属性的默认值的
+  //   writable : false, // 决定name属性是否可以被修改
+  //   enumerable : false, // 决定了name属性是否可以被for-in遍历
+  //   configurable : false // 决定name属性是否可以被移除
+  // })
+  // obj.name = '狗蛋';
+  // obj.age = 13;
+  // // console.log(obj);
+  // for(let key in obj){
+  //   console.log(key);
+  // }
+
+  // delete obj.name;
+  // console.log(obj);
+
+
+  // 删除一个对象的属性
+  // let o = {
+  //   name : '翠花',
+  //   age : 18
+  // };
+  // delete o.name;
+  // console.log(o);
+
+
+  /* 获取器和设置器 */
+  // let obj = {};
+
+  // let _name = '小花';
+  // Object.defineProperty(obj,'name',{
+  //   get : function(){ // 该函数在获取对象的属性的时候被调用
+  //     // console.log(1);
+  //     return _name ; // 这个a就是我们在获取name属性的时候，把a的值作为name属性的值返回
+  //   },
+  //   set : function(val){ // 该函数在设置对象的属性的时候被调用
+  //     // console.log(2);
+  //     // val 参数，就是你在给该属性赋值的时候接受到的值
+  //     _name = val;
+  //   }
+  // })
+
+  // // console.log(obj);
+  // // obj.name
+
+  // obj.name = '小刚'
+  // console.log(obj);
+
+
+  // let obj = {};
+  // /* 通常使用获取器和设置器，模拟私有属性 */
+  // ; (function () {
+  //   let _name = '二狗';
+  //   Object.defineProperty(obj, 'name', {
+  //     get: function () {
+  //       return _name;
+  //     },
+  //     set: function (val) {
+  //       // 一个人的名字是有规则的，必须是字符串
+  //       if (typeof val === 'string') {
+  //         _name = val;
+  //       }
+  //     }
+  //   })
+  // })();
+
+  // obj.name = true;
+  // console.log(obj.name);
+
+
+  /* 其实我们以前已经用过了
+
+    元素.clientWidth
+    元素.offsetWidth
+
+    元素.style.css属性名 = 新的值
+    如果修改的是一个元素的背景颜色，而赋值的时候不是一个背景颜色 ， 能改吗？
+  */
+ let box = document.querySelector('#box');
+ box.style.backgroundColor = 'yello';
+ box.style.width = '100';
+ box.style.height = '100px';
+
+</script>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+函数
+  - 函数也是对象
+    - 所有的函数都是被new出来的
+      new Function(参数,参数,...,函数体)
+  - 函数的原型
+    - Function.prototype
+      - 方法
+        - Function非常特殊，它既是自己的构造函数也是自己的实例对象
+        - Object是非常有用，很多构造函数的原型对象都是有它new出来的 —— 万物皆对象
+        - 函数是一种特殊的东西，它既可以作为构造函数，也可以作为实例对象，在找原型的时候要区分它所处的角色
+  - 借用函数
+    - 什么是借用，为什么要借用
+      - 为了让代码可以重复使用
+    - call
+      函数名.call(新的this,参数1,参数2...);
+    - apply
+      函数名.apply(新的this,[参数1,参数2...])
+    - bind
+      函数名.bind(新this,参数1,参数2...);
+  this的指向
+    - 普通函数 - window
+    - 构造函数 - 实例对象
+    - 事件对象 - 事件源 - 给谁注册，谁就是事件源
+    - 回调函数 - 大多数情况都是window,一般this不是window的都是浏览器里面使用借用的方式把this修改
+    - 对象的方法 - 实例对象
+    - 箭头函数 - 上一级作用域的this
+函数的使用技巧
+  - 闭包
+    - 只要跨局部作用域访问变量，就形成了闭包
+    - 缓存数据，保护数据
+    - 慎用 - 形成闭包的变量所占据的内存是无法被回收，所以需要慎用
+      - 把闭包的变量设置为null就可以被回收
+      很多时候都在用，尽量从执行效率的角度考虑，要不要使用闭包就行
+      更加推荐使用 函数传参的方式 进行数据传递，而不是使用闭包
+  - 递归
+    - 在函数内部有条件的调用自己
+    - 通常用来解决循环无法解决的重复的问题
+    - 能使用循环，就尽量不要使用递归了 - 递归的效率其实是比循环要低
+*/
+// function f1(){
+//   var a = 10;
+//   function f2(){
+//     a++;
+//   }
+//   f2();
+// }
+
+// function f1(){
+//   var a = 10;
+//   function f2(a){
+//     a++;
+//   }
+//   f2(a);
+// }
+</script>
+</html>
