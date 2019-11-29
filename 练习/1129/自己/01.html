@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" name="" value="登录" id="btn" />
+  </body>
+  <script>
+    //素组
+    let obj = {};
+    obj["loginSuccess"] = [];
+
+    function saveData() {
+      console.log("模拟存储");
+      let a = 19;
+    }
+    obj["loginSuccess"].push(saveData);
+    function modifyUserHeadImg() {
+      console.log("修改了用户的头像，总共50行代码");
+      let a = 20;
+    }
+    obj["loginSuccess"].push(modifyUserHeadImg);
+
+function loadCartData(){
+    console.log('加载购物车');
+    let a= 21;
+}
+obj['loginSuccess'].push(loadCartData);
+    // 当我们登录成功的时候，根据一个指定的键，找到对象里面的数组，把数组里面的每个函数依次调用
+    //依次调用
+    console.log(obj);
+    btn.onclick = function() {
+      let arr = obj["loginSuccess"];
+     
+      arr.forEach(e => {
+        e();
+        console.log(e);
+      });
+    };
+  </script>
+</html>
+// 素组存储 函数  依次执行

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" name="" value="登录" id="btn" />
+  </body>
+  <script>
+    //素组
+    let obj = {};
+    obj["loginSuccess"] = [];
+
+    function saveData() {
+      console.log("模拟存储");
+      let a = 19;
+    }
+    obj["loginSuccess"].push(saveData);
+    function modifyUserHeadImg() {
+      console.log("修改了用户的头像，总共50行代码");
+      let a = 20;
+    }
+    obj["loginSuccess"].push(modifyUserHeadImg);
+
+    function loadCartData() {
+      console.log("加载购物车");
+      let a = 21;
+    }
+    obj["loginSuccess"].push(loadCartData);
+    // 当我们登录成功的时候，根据一个指定的键，找到对象里面的数组，把数组里面的每个函数依次调用
+    //依次调用
+    console.log(obj);
+    btn.onclick = function() {
+      let arr = obj["loginSuccess"];
+
+      arr.forEach(e => {
+        e();
+        console.log(e);
+      });
+    };
+  </script>
+
+  <script>
+    let Events = {
+      add: function(key, fn) {
+        // 判断这个键的数组是否存在，如果存在，就往里面添加函数即可，如果没有存在，就创建一个新的数组
+        if (!(this[key] instanceof Array)) {
+          this[key] = [];
+        }
+        this[key].push(fn);
+      },
+      trigger: function(key) {
+        // // 遍历数组，把数组里面的每个函数，取出来，调用
+        for (let i = 0; i < this[key].length; i++) {
+          this[key][i]();
+        }
+      }
+    };
+    Events.add("login", function() {
+      console.log("测试yong");
+    });
+
+    Events.add("login", function() {
+      console.log("第二次测试用");
+    });
+    //获取元素点击注册
+    let btn = document.querySelector("#btn");
+    btn.onclick = function() {
+      Events.trigger("login");
+    };
+  </script>
+
+  <script>
+    let Events = {
+      // 这个添加函数的功能，叫订阅
+      add: function(key, fn) {
+        //instanceof 运算符用来检测 constructor.prototype 是否存在于参数 object 的原型链
+        if (!(this[key] instanceof Array)) {
+          this[key] = [];
+        }
+        this[key].push(fn);
+      },
+      // 一次性全部把函数调用的功能，叫发布
+      tigger: function(ket) {
+        for (let i = 0; i < this[key].length; i++) {
+          this[key][i]();
+        }
+      }
+    };
+
+    //调用方法 add
+
+    Events.add('login',function(){
+      console.log('200行代码,用于存储用户数据的');
+    })
+    //注册事件
+    let btn = document.querySelector("#btn");
+    btn.onclick = function() {
+      //执行trigger 函数
+      Events.trigger("login");
+    };
+  </script>
+</html>
+// 素组存储 函数 依次执行

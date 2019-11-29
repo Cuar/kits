@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  创建正则对象
+    let reg = new RegExp(规则,匹配模式)
+    let reg = /规则/匹配模式
+
+      匹配模式
+        g - global - 全局匹配
+        i - ignore - 忽略大小写
+ */
+
+ /* 一般是在对字符串进行替换的时候使用的 */
+// 字符串.replace();
+//  把一个字符串中满足条件的部分替换为新的字符串
+// let str = 'abcdef';
+// console.log(str.replace('c','g'));
+
+// let str = 'abcabcabcabcabcabc';
+// for(let i = 0; i < str.length; i++){
+//   if(str.indexOf('c') === -1){
+//     break;
+//   }
+//   str = str.replace('c','g')
+// }
+// console.log(str);
+
+/* 使用正则表达式进行匹配 */
+/*  字符串.replace(正则对象,新的字符) */
+// let res = str.replace(/c/g,'k')
+// console.log(res);
+
+// 忽略大小写的匹配
+let str = 'abCabc';
+console.log(str.replace(/c/i,'k'));
+// 既要忽略大小写又要全局匹配
+console.log(str.replace(/c/ig,'k'));
+</script>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<input type="button" value="登录" id="btn">
+</body>
+<script>
+/*
+  登录
+    - 1. 点击按钮，实现登录
+      - 登录成功之后
+        - 需要把一些用户的数据存储起来，下次用户打开页面，就可以直接使用
+        - 修改用户登录过后的头像
+        - 加载用户存储在服务器端的购物车的列表
+        - ...
+*/
+
+let btn = document.querySelector('#btn');
+// 注册点击事件，
+btn.onclick = function(){
+  // 默认登录成功 - 登录的过程是一个异步的过程 —— 什么叫异步？不同步，alert这种代码会阻塞式执行，循环也是阻塞式执行，前面的步骤没有执行完毕，后面的步骤是不会执行
+  // 定时器其实就是异步执行的，主要的代码继续向下执行，定时器自己执行
+  // console.log('支付宝到账30元');
+  // setTimeout(function(){
+  //   console.log('冰红茶买回来了');
+  // },1000)
+  // console.log('支付宝到账30元');
+  // console.log('支付宝到账30元');
+  // console.log('支付宝到账30元');
+
+  // 登录其实是一个异步的过程，真正会使用过几天学的ajax来实现，现在不会，使用 定时器假装一下
+  setTimeout(() => {
+    // 已经登录成功了
+    // 要做的事情
+    // 1期项目的时候，只要求  把用户数据存起来
+    console.log('这是1期的代码，为了把数据存起来，公共200行');
+    let a = 10;
+
+    /* 过了几天，产品经理要求加一个功能在登录成功的时候 ， 修改用户的头像 */
+    console.log('到服务器请求头像，使用ajax实现的，再次找到头像的img标签，修改它的src，代码总共50行');
+    let a = 20;
+
+    /* 又过了几个月，产品经理说： 登录成功之后，就需要把用户的购物车加载出来 */
+    console.log('再次使用ajax大服务器获取购物车的数据，动态的根据数组生成商品的列表，实现全选全不选等等的功能,公共400行代码');
+  }, 3000);
+}
+
+</script>
+</html>

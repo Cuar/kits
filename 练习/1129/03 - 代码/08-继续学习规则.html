@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  正则的其他的规则
+*/
+
+/* 条件连接  |  */
+// 匹配字符串里面出现a或则b
+// console.log(/a|b/.test('1234'));
+// console.log(/a|b/.test('12a34'));
+// console.log(/a|b/.test('12b34'));
+/* 注意或者在以前喜欢在左右两边加空格，但是在正则里面不要加 */
+// console.log(/a | b/.test()); // 容易产生歧义
+// 括号可以实现分组 - 通常如果有多个字符进行组合，使用括号分组，避免歧义
+// console.log(/a|(bc)/);
+// console.log(/(a| )b/); // a或者空格  后面跟着b
+
+// 开头和结尾
+// 判断开头头
+/*
+  ^规则
+*/
+/* 判断字符串是否以数字开头 */
+// console.log(/^\d/.test('abc'));
+// console.log(/^\d/.test('1abc'));
+// 判断结尾
+/*
+  规则$  唯一一个放在最后的，其他都不是
+*/
+/* 判断是否以数字结尾 */
+// console.log(/\d$/.test('abc'));
+// console.log(/\d$/.test('abc3'));
+
+/* 判断数量 */
+/*
+  * - 任意多个，可以是0个，可以是1个，也可以是无限多个
+  ? - 出现一次或则0次
+  + - 至少一次
+ */
+
+//  是否出现任意个数字
+// console.log(/\d*/.test('abc'));
+
+/* 判断数字出现或者不出现 */
+// console.log(/\d?/.test('abc'));
+// console.log(/\d?/.test('abc1'));
+// console.log(/\d?/.test('abc132423'));
+
+/* 匹配数字至少出现1次 */
+// console.log(/\d+/.test('abc'));
+// console.log(/\d+/.test('abc1'));
+// console.log(/\d+/.test('abc123'));
+
+/* 自定义数量 */
+/*
+  {n}  -   表示要求某个规则出现n次
+  {n,} -   至少n次
+  {n,m} -  规则n~m次
+ */
+// 匹配数字出现3次
+// console.log(/\d{3}/.test('abc12'));
+// console.log(/\d{3}/.test('abc123'));
+// console.log(/\d{3}/.test('abc1234'));
+
+
+/* 取反 */
+console.log(/\d/.test('1'));
+console.log(/\D/.test('1'));
+</script>
+</html>

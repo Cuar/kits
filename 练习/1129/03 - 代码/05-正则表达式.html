@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  什么是正则表达式
+    一套验证字符串的规则
+  有什么用
+    验证字符串是否满足某些规律
+  怎么用
+    面向对象
+      new 正则对象，调用正则的方法实现
+
+    构造函数的方式创建正则对象
+      let reg = new RegExp(规则);
+
+    字面量的方式
+      let reg = /规则/
+
+    调用正则对象的方法
+      test方法
+        正则对象.test(字符串)
+        返回值是true或者false，表示是否匹配
+*/
+
+// // 判断一个字符串里面是否有数字
+// let reg1 = new RegExp('\\d');
+// let res1 = reg1.test('abcdef');
+// console.log(res1);
+// res1 = reg1.test('ab4c');
+// console.log(res1);
+// // 判断一个字符串里面是否包含a
+// let reg2 = new RegExp('a');
+// console.log(reg2.test('1234'));
+// console.log(reg2.test('123a4'));
+// console.log(reg2.test('123A4'));
+
+
+//判断字符串是否有数字
+let reg1 = /\d/;
+console.log(reg1.test('abc'));
+console.log(reg1.test('abc9'));
+//判断字符串是否有a
+let reg2 = /a/;
+console.log(reg2.test('1234'));
+console.log(reg2.test('123a4'));
+console.log(reg2.test('123A4'));
+</script>
+</html>

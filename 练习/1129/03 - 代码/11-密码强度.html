@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        pre {
+            font-size: 24px;
+        }
+        .main {
+            width: 600px;
+            margin: 100px auto;
+            text-align: center;
+        }
+        .row {
+            height: 50px;
+            padding-top: 10px;
+            border: 1px solid #335677;
+        }
+        input {
+            height: 40px;
+            width: 80%;
+            font-size: 26px;
+            padding: 0 8px;
+        }
+        .progress {
+            width: 80%;
+            height: 30px;
+            border-radius: 4px;
+            border: 1px solid #339956;
+            background-color: #33cc56;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .inner {
+            width: 0%;
+            height: 100%;
+            background-color: #aadd25;
+            transition: all 400ms;
+        }
+    </style>
+</head>
+<body>
+<pre>
+    密码强度验证案例：
+        要求：
+            1 当前用户的输入长度超过6位的时候开始验证
+            2 如果密码包含数字，密码安全等级+1
+            3 如果密码包含小写字母，密码安全等级+1
+            4 如果密码包含大写字母，密码安全等级+1
+            4 如果密码包含特殊字符，密码安全等级+1
+</pre>
+<div class="main">
+    <div class="row">
+        <input type="text" id="pwd"/>
+    </div>
+    <div class="row">
+        <div class="progress">
+            <div class="inner"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+/*
+  密码的强度验证
+    1. 密码长度要超过6位
+    2. 密码包含数字，强度等级+1
+    3. 密码包含小写字母，强度等级+1
+    4. 密码包含大写字母，强度等级+1
+    5. 密码包含特殊符号，强度等级+1
+*/
+
+// 在输入的时候，对密码进行验证，输入的事件 - 键盘按下或者是弹起
+// 在输入结束的时候 —— 按键弹起的时候验证
+let pwd = document.querySelector('#pwd');
+let inner = document.querySelector('.inner');
+pwd.onkeyup = function(){
+  // 验证当前的密码的内容
+  // 先获取当前的内容
+  let password = this.value;
+  // 判断是否到达6位
+  if(password.length < 6){
+    return;
+  }
+  // 先定义一个变量表示当前的密码的强度
+  let lv = 0;
+  // 开始验证里面是否包含数字
+  if(/\d/.test(password)){
+    lv++;
+  }
+  // 验证里面是否包含小写字母
+  if(/[a-z]/.test(password)){
+    lv++;
+  }
+  // 验证里面是否包含大写字母
+  if(/[A-Z]/.test(password)){
+    lv++;
+  }
+  // 验证里面是否包含特殊字符
+  // 这个写法是我们手动的允许某些特殊字符
+  if(/[*-+._]/.test(password)){
+  // 如果允许任何的特殊字符 一般不会
+  // if(/\W/.test(password)){}
+    lv++;
+  }
+  // console.log(lv);
+  // 提示用户 - 把整个强度分为4级，每一级就是宽度的25%，只要算出最终的强度，把的宽度设置给div就行了
+  let width = lv * 25;
+  inner.style.width = width + '%';
+}
+</script>
+</html>

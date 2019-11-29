@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/* 匹配数字 */
+/*
+  \d 表示匹配数字
+*/
+
+/* 匹配字母数字和下划线 */
+/*
+  \w - 匹配数字字母和下划线的
+*/
+// let reg = /\w/;
+// console.log(reg.test('123'));
+// console.log(reg.test('abc'));
+// console.log(reg.test('_'));
+
+
+/*
+  匹配空白字符
+    \s
+*/
+// let reg = /\s/;
+// console.log(reg.test('123'));
+// console.log(reg.test('12 3'));
+// console.log(reg.test('12\r3'));
+// console.log(reg.test('12\n3'));
+// console.log(reg.test(`12
+// 34`));
+
+/* 指定一个范围的写法  [] */
+/* 匹配字母 */
+/* 匹配小写字母 */
+// let reg = /[a-z]/;
+// console.log(reg.test('123'));
+// console.log(reg.test('12f3'));
+// 匹配大写字母
+// console.log(/[A-Z]/.test('abc'));
+// console.log(/[A-Z]/.test('aBc'));
+// 匹配所有字母
+// console.log(/[a-zA-Z]/.test('132'));
+// console.log(/[a-zA-Z]/.test('1A32'));
+// console.log(/[a-zA-Z]/.test('1b32'));
+// 使用范围的方式匹配数字
+// console.log(/[0-9]/.test('1'));
+// console.log(/[0-9]/.test('*'));
+// 匹配数字字母
+// console.log(/[0-9a-zA-Z]/.test('123'));
+// console.log(/[0-9a-zA-Z]/.test('bac'));
+// console.log(/[0-9a-zA-Z]/.test('A'));
+
+
+// 匹配单个字符，可以直接写，但是建议把单个字符放到 [] 里面
+// console.log(/_/.test('123'));
+// console.log(/_/.test('12_3'));
+// console.log(/[_]/.test('12_3'));
+
+// 为什么要把的那个字符放到中括号里面?
+// 因为中括号还有转义的能力
+
+
+// 正则里面有一些特殊的符号都是有特殊意义的，如果就是想要匹配某些特殊的符号 比如 小点
+// 正则的小点是匹配  任意的单个字符的 ,除了  \r\n
+// console.log(/./.test('a'));
+// console.log(/./.test('b'));
+// console.log(/./.test('c'));
+// console.log(/./.test('\r'));
+// console.log(/./.test('\n'));
+
+// 就是想要匹配邮箱里面的小点
+// 把小点转义
+// 转义有两个方式  \  []
+
+// console.log(/\./.test('a'));
+// console.log(/[.]/.test('a'));
+
+
+</script>
+</html>

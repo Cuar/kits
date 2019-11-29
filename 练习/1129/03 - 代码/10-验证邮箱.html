@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  域名：   一个网站的地址  jd.com   163.com   qq.com
+      .com  .cn  .xyz   .net  .cn  .us .tw .hk  顶级域名
+
+      顶级域名之前的那一部分  163  qq  jd  -  二级域名
+
+  验证邮箱
+    规律
+      1. @符号前面是账号
+        - 数字、字母、下户线 另外自己允许的字符
+      2. @符号后面是邮箱的域名
+        jd/163/qq
+      3. 域名后面是小点
+      4. 小点后面是顶级域名
+
+    ^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$
+
+    网易邮箱要求 以字母开头
+      ^[a-zA-Z]+@\w+([-.]\w+)*\.\w+([-.]\w+)*$
+    还要求要在 6~18位之间
+      ^[a-zA-Z]\w{5,17}@\w+([-.]\w+)*\.\w+([-.]\w+)*$
+
+    一般来说自己写的正则，可能会有一定的遗漏，把人家写了很多的拿过来，自己借鉴一下，修改一下，就是自己的了
+*/
+
+// 以字母开头的
+// let reg = /^[a-zA-Z]+[@]/;
+// console.log(reg.test('abc@qq.com'));
+</script>
+</html>
