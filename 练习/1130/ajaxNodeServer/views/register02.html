@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>表单注册</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f7f7f7;
+      }
+
+      ul {
+        margin: 0;
+        padding: 50px;
+        list-style: none;
+      }
+
+      .register {
+        width: 800px;
+        margin: 50px auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      li {
+        display: flex;
+        margin: 20px 0;
+      }
+
+      label,
+      input {
+        display: block;
+        float: left;
+        height: 46px;
+        font-size: 24px;
+        box-sizing: border-box;
+        color: #333;
+      }
+
+      label {
+        width: 200px;
+        line-height: 46px;
+        margin-right: 30px;
+        text-align: right;
+      }
+
+      input {
+        width: 320px;
+        padding: 8px;
+        line-height: 1;
+        outline: none;
+        position: relative;
+      }
+
+      input.code {
+        width: 120px;
+      }
+
+      input.verify {
+        width: 190px;
+        margin-left: 10px;
+      }
+
+      input.disabled {
+        background-color: #ccc !important;
+        cursor: not-allowed !important;
+      }
+
+      input[type="button"] {
+        border: none;
+        color: #fff;
+        background-color: #e64145;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .tips {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 40px;
+        text-align: center;
+      }
+
+      .tips p {
+        min-width: 300px;
+        max-width: 400px;
+        line-height: 40px;
+        margin: 0 auto;
+        color: #fff;
+        display: none;
+        background-color: #c91623;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="register">
+      <form id="ajaxForm">
+        <ul>
+          <li>
+            <label for="">用户名</label>
+            <input type="text" name="userName" class="name" />
+          </li>
+          <li>
+            <label for="">请设置密码</label>
+            <input type="password" name="password" class="pass" />
+          </li>
+          <li>
+            <label for="">请确认密码</label>
+            <input type="password" name="" class="repass" />
+          </li>
+          <li>
+            <label for="">验证手机</label>
+            <input type="text" name="phone" class="mobile" />
+          </li>
+          <li>
+            <label for="">短信验证码</label>
+            <input type="text" name="" class="code" />
+            <!-- <div class="btn verify disabled">获取验证码</div> -->
+            <input type="button" value="获取验证码" class="verify" />
+          </li>
+          <li>
+            <label for=""></label>
+            <input type="button" class="submit " value="立即注册" />
+          </li>
+        </ul>
+      </form>
+    </div>
+    <div class="tips">
+      <p></p>
+    </div>
+  </body>
+  <script src="../static/js/jquery.js"></script>
+  <script>
+    let a = "凸( `⦿ὢ⦿´)凸";
+    let b = "——————/´ ¯/)";
+    let c = "—————-/—-/";
+    let d = "—————-/—-/";
+    let e = "———--/´¯/'--'/´¯`·_";
+    let f = " ———-/'/--/—-/—--/¨¯'' ";
+    let g = "——--('(———- ¯~/'--')";
+    let h = " ———''————-'—--/ ";
+    let i = " ———-''————_-·´ ";
+    let j = " ————''———--( ";
+    let k = " ————-''———--  ";
+
+    //注册提交按钮 验证是否为空
+    $(".submit ").on("click", function() {
+      //验证用户名
+      let userName = $(".name").val();
+      if (userName.trim().length === 0) {
+        alert(
+          a +
+            "\n" +
+            b +
+            "\n" +
+            c +
+            "\n" +
+            d +
+            "\n" +
+            e +
+            "\n" +
+            f +
+            "\n" +
+            g +
+            "\n" +
+            h +
+            "\n" +
+            i +
+            "\n" +
+            j +
+            "\n" +
+            k
+        );
+        return;
+      }
+      $.ajax({
+		url : 'http://127.0.0.1:8080/isUserNameExist',
+		type : 'get',
+		data : { userName :userName },
+		success : function(res){
+			// console.log(res);
+			// 返回的结果是一个对象，code是200表示可用，如果不是200，就是用户名有问题
+			if(res.code !== 200){
+				alert(res.msg);
+				return;
+			}
+		}
+	});
+      //验证密码
+      let password = $(".pass").val();
+      if (password.trim().length === 0) {
+        alert(
+          a +
+            "\n" +
+            b +
+            "\n" +
+            c +
+            "\n" +
+            d +
+            "\n" +
+            e +
+            "\n" +
+            f +
+            "\n" +
+            g +
+            "\n" +
+            h +
+            "\n" +
+            i +
+            "\n" +
+            j +
+            "\n" +
+            k
+        );
+        return;
+      }
+      //确认密码
+      let repass = $(".repass").val();
+      if (repass.trim().length === 0) {
+        alert(
+          a +
+            "\n" +
+            b +
+            "\n" +
+            c +
+            "\n" +
+            d +
+            "\n" +
+            e +
+            "\n" +
+            f +
+            "\n" +
+            g +
+            "\n" +
+            h +
+            "\n" +
+            i +
+            "\n" +
+            j +
+            "\n" +
+            k
+        );
+        return;
+      }
+      //手机号
+      let mobile = $(".mobile").val();
+      if (mobile.trim().length === 0) {
+        alert(
+          a +
+            "\n" +
+            b +
+            "\n" +
+            c +
+            "\n" +
+            d +
+            "\n" +
+            e +
+            "\n" +
+            f +
+            "\n" +
+            g +
+            "\n" +
+            h +
+            "\n" +
+            i +
+            "\n" +
+            j +
+            "\n" +
+            k
+        );
+        return;
+      }
+
+      //短信验证码
+      let code = $(".code").val();
+      if (code.trim().length !== 4) {
+        alert(
+          a +
+            "\n" +
+            b +
+            "\n" +
+            c +
+            "\n" +
+            d +
+            "\n" +
+            e +
+            "\n" +
+            f +
+            "\n" +
+            g +
+            "\n" +
+            h +
+            "\n" +
+            i +
+            "\n" +
+            j +
+            "\n" +
+            k
+        );
+        return;
+      }
+
+      //数据库
+      $.ajax({
+		url : 'http://127.0.0.1:8080/doRegister',
+		type : 'post',
+		data : {
+			userName : userName,
+			password : password,
+			phone : mobile
+		},
+		success : function(res){
+			// console.log(res);
+			if(res.code === 200){
+				alert('注册成功，稍后自动跳转到主页/登录页面');
+			}else{
+				alert('注册失败，请重试');
+			}
+		}
+	})
+    });
+
+    //验证密码强度
+    $(".pass").on("blur", function() {
+      let password = $(this).val();
+      //长度6
+      if (!/\d/.test(password)) {
+        alert(
+          a +
+            "\n" +
+            b +
+            "\n" +
+            c +
+            "\n" +
+            d +
+            "\n" +
+            e +
+            "\n" +
+            f +
+            "\n" +
+            g +
+            "\n" +
+            h +
+            "\n" +
+            i +
+            "\n" +
+            j +
+            "\n" +
+            k
+        );
+        return;
+      }
+      if (password.length <= 6) {
+        alert(
+          a +
+            "\n" +
+            b +
+            "\n" +
+            c +
+            "\n" +
+            d +
+            "\n" +
+            e +
+            "\n" +
+            f +
+            "\n" +
+            g +
+            "\n" +
+            h +
+            "\n" +
+            i +
+            "\n" +
+            j +
+            "\n" +
+            k
+        );
+        return;
+      }
+      if (!/[a-zA-Z]/.test(password)) {
+        alert(
+          a +
+            "\n" +
+            b +
+            "\n" +
+            c +
+            "\n" +
+            d +
+            "\n" +
+            e +
+            "\n" +
+            f +
+            "\n" +
+            g +
+            "\n" +
+            h +
+            "\n" +
+            i +
+            "\n" +
+            j +
+            "\n" +
+            k
+        );
+        return;
+      }
+    });
+    //验证是否为相同
+    $(".repass").on("blur", function() {
+      let password = $(".pass").val();
+      let repass = $(".repass").val();
+      if (password !== repass) {
+        alert(
+          a +
+            "\n" +
+            b +
+            "\n" +
+            c +
+            "\n" +
+            d +
+            "\n" +
+            e +
+            "\n" +
+            f +
+            "\n" +
+            g +
+            "\n" +
+            h +
+            "\n" +
+            i +
+            "\n" +
+            j +
+            "\n" +
+            k
+        );
+        return;
+      }
+      if (password.length <= 6) {
+        alert(
+          a +
+            "\n" +
+            b +
+            "\n" +
+            c +
+            "\n" +
+            d +
+            "\n" +
+            e +
+            "\n" +
+            f +
+            "\n" +
+            g +
+            "\n" +
+            h +
+            "\n" +
+            i +
+            "\n" +
+            j +
+            "\n" +
+            k
+        );
+        return;
+      }
+    });
+    //验证码
+    $(".verify").on("click", function() {
+      let phone = $(".mobile").val();
+      if(!/^[1]\d{10}$/.test(phone)){
+		alert('请填写正确的手机号码');
+    alert(
+          a +
+            "\n" +
+            b +
+            "\n" +
+            c +
+            "\n" +
+            d +
+            "\n" +
+            e +
+            "\n" +
+            f +
+            "\n" +
+            g +
+            "\n" +
+            h +
+            "\n" +
+            i +
+            "\n" +
+            j +
+            "\n" +
+            k
+        );
+		return;
+	}
+  //验证码
+
+      $.ajax({
+        url:'http://127.0.0.1:8080/getCodeWithoutPhone',
+        type:'get',
+
+        success :function(res){
+          $('.code').val(res.code);
+        }
+      })
+   
+      //定时器
+      let verify=document.querySelector('.verify');
+      let time =60;
+      verify.disabled =true;
+      verify.value='获取验证码('+ time +')';
+      let intervalId =setInterval(function(){
+        time--;
+        verify.value='获取验证码('+ time +')';
+        if(time===0){
+          clearInterval(intervalId);
+          //恢复
+          $(".verify").disabled =false;
+          verify.value ='获取验证码';
+        }
+      },1000);
+    });
+  </script>
+</html>
