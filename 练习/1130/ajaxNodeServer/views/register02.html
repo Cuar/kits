@@ -316,12 +316,14 @@
 		success : function(res){
 			// console.log(res);
 			if(res.code === 200){
-				alert('注册成功，稍后自动跳转到主页/登录页面');
+        alert('注册成功，稍后自动跳转到主页/登录页面');
+        location.href='./index.html';
 			}else{
 				alert('注册失败，请重试');
 			}
 		}
-	})
+  })
+  
     });
 
     //验证密码强度
@@ -507,7 +509,7 @@
    
       //定时器
       let verify=document.querySelector('.verify');
-      let time =60;
+      let time =60000;
       verify.disabled =true;
       verify.value='获取验证码('+ time +')';
       let intervalId =setInterval(function(){
