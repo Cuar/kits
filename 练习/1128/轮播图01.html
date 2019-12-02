@@ -150,6 +150,7 @@
     //注册鼠标移入事件
    list.forEach(function(e,i){
     e.onmouseover = function(){
+      console.log(list);
         //移动位置等于 图片宽度 *索引号 -1
         let target = 730 * i * -1 ;
         
