@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //封装
+    function ajax(obj) {
+      obj =obj || {};
+      obj.url =obj.url ||'';
+      obj.type =obj.type || 'get';
+      obj.data =obj.data || {};
+
+      let arr=[];
+      for(let key in obj.data){
+        arr.push(`${key}=${obj.data[key]}`)
+      }
+      obj.data =arr.join('&');
+      //创建异步对象
+      let xhr = new XMLHttpRequest();
+
+      //设置请求方式 and 地址
+      if ( obj.type.toLowerCase() === "get") {
+        //'?'?????
+        obj.url += "?" + data;
+      }
+      xhr.open( obj.type,  obj.url);
+
+      //发送请求
+      if ( obj.type.toLowerCase() === "post") {
+        xhr.setRequestHeader(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        );
+        xhr.send(obj.data);
+      } else {
+        xhr.send();
+      }
+      //发送请求
+     
+      //监听事件
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          let response = xhr.responseText;
+
+          callback(xhr.responseText);
+          xhr.responseText;
+
+          
+          if(xhr.getResponseHeader('Content-Type').indexOf('json')!==-1){
+            response =JSON.parse(xhr.responseText);
+          }
+          obj.callback && obj.callback(response);
+        }
+      };
+    }
+    //调用
+    /*  ajax(
+      "http://127.0.0.1:8080/doRegister",
+      "post",
+      "userName=ergouzi2&password=123456&phone=12345678901",
+      function(res) {
+        console.log(res);
+      }
+    ); */
+    //这样写太麻烦 优化一下 键值对
+    ajax("http://127.0.0.1:8080/doRegister", "post", {
+      userName: "二狗子",
+      password: "123456",
+      phone: "12345678901"
+    } ,function(res){
+      console.log(res);
+    });
+  </script>
+</html>

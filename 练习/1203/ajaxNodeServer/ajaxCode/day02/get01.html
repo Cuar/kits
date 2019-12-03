@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<script src="../../static/js/jquery.js"></script>
+<body>
+    Test
+    <div class="box"></div>
+</body>
+<script>
+/* 
+原生Ajax
+    get 和 post携带数据是不一样的
+    数据方式
+
+    如果使用get方式 会稍有不同
+ */
+ /* 使用原生验证 */
+
+//创建一个异步对象
+
+//设置请求方式
+
+//发送请求
+
+//监听状态
+
+let xhr =new XMLHttpRequest();
+xhr.open('get','http://127.0.0.1:8080/isUserNameExist?userName=Cuar_');
+xhr.send();
+console.log(xhr.send);
+xhr.onreadystatechange = function(){
+    if(xhr.readyState === 4 && xhr.status ===200){
+        console.log(xhr.responseText);
+        console.log(xhr.readyState);
+        console.log(xhr.status);
+    }
+}
+</script>
+</html>

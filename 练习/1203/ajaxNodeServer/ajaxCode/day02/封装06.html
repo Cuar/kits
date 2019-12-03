@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //封装
+    function ajax(url, type, data, callback) {
+      let arr=[];
+      for(let key in data){
+        arr.push(`${key}=${data[key]}`)
+      }
+      data =arr.join('&');
+      //创建异步对象
+      let xhr = new XMLHttpRequest();
+
+      //设置请求方式 and 地址
+      if (type.toLowerCase() === "get") {
+        //'?'?????
+        url += "?" + data;
+      }
+      xhr.open(type, url);
+
+      //发送请求
+      if (type.toLowerCase() === "post") {
+        xhr.setRequestHeader(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        );
+      }
+      //发送请求
+      xhr.send(data);
+      //监听事件
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          callback(xhr.responseText);
+          xhr.responseText;
+        }
+      };
+    }
+    //调用
+    /*  ajax(
+      "http://127.0.0.1:8080/doRegister",
+      "post",
+      "userName=ergouzi2&password=123456&phone=12345678901",
+      function(res) {
+        console.log(res);
+      }
+    ); */
+    //这样写太麻烦 优化一下 键值对
+    ajax("http://127.0.0.1:8080/doRegister", "post", {
+      userName: "二狗子",
+      password: "123456",
+      phone: "12345678901"
+    } ,function(res){
+      console.log(res);
+    });
+  </script>
+</html>

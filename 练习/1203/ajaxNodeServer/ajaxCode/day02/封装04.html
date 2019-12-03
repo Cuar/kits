@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+ <script>
+   //封装函数
+ function ajax(obj){
+
+ }
+
+ //封装Ajax实现注册
+ //对象
+ ajax({
+   url : 'http://127.0.0.1:8080/doRegister',
+   type :'post',
+   data : {
+     userName : '大狗子',
+     password : '12345678901',
+     phone : '12345678901'
+   },
+   function(res){
+    // console.log(res);
+    if(res.code === 200){
+      alert('注册成功，3秒后户自动跳转');
+    }
+  }
+ })
+ </script>
+</html>
