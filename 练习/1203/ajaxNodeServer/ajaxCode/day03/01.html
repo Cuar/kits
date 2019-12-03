@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<!-- 第一步：引入js文件 -->
+<script src="../../static/js/template-web.js"></script>
+<!-- 第二步： 写一般模板 -->
+<!-- 模板的要求： 1. 是一个script标签 2.该标签的type属性不能是js 3.需要一个id
+  模板里面的代码，是有特殊的语法要求的
+
+  1. 必须按照它的语法规范些
+  2. 不要尝试在里面写注释，因为你认为是注释，但是 模板引擎不认为它是注释
+-->
+<script type="text/template" id="tp">
+<div><%=$data.name%></div>
+</script>
+<script>
+let result=template('tp',{name : '大狗子'});
+
+
+document.body.innerHTML =result;
+</script>
+</html>

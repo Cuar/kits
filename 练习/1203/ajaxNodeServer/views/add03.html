@@ -152,23 +152,6 @@
       }
     }
     //实现新增
-    $('#sub').on('click',function(){
-      let data = $('#myform').serialize();
-
-      $.data({
-        url : 'http://127.0.0.1:8080/addNewHero',
-        type : 'post',
-        data : data,
-        success:function(res){
-          if(res.code === 200){
-            location.href = './index.html';
-          }else{
-            $('.container-fluid').text(res.msg);
-                $('#modelId').modal();
-          }
-        }
-      });
-    })
     
   </script>
 </html>

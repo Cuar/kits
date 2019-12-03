@@ -151,9 +151,12 @@
         }
       }
     }
+    let da = $('#myform').serialize();
+    console.log(da);
     //实现新增
     $('#sub').on('click',function(){
       let data = $('#myform').serialize();
+      
 
       $.data({
         url : 'http://127.0.0.1:8080/addNewHero',
