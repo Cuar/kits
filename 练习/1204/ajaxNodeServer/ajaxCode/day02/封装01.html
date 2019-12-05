@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+      //封装函数
+    function ajax(url, type, data, callback) {
+      //创异步对象
+      let xhr = new XMLHttpRequest();
+      //设置请求方式 and 地址
+      if (type.toLowerCase() === "get") {
+        url += "?" + data;
+      }
+      xhr.open(type, url);
+
+      //发送请求
+      // 如果请求是post，要把数据放在send里面，同时需要设定 请求头
+      if (type.toLowerCase() === "post") {
+        xhr.setRequestHeader(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        );
+        //发送请求
+        xhr.send(data);
+      } else {
+        xhr.send();
+      }
+      //监听事件
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // 如果请求成功，就执行对应的逻辑
+          callback(xhr.responseText);
+        }
+      };
+    }
+
+    /* 实现注册 */
+    ajax('http://127.0.0.1:8080/doRegister','post',
+'userName=ergouzi2&password=123456&phone=12345678901'
+,function(res){
+    console.log(res);
+});
+  </script>
+</html>

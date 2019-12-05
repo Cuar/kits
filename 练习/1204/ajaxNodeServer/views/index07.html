@@ -96,80 +96,55 @@
 </script>
 
 <script>
-//功能   验证登录：
-   // 1. 先从本地存储中获取用户的id
-    //2. 发送ajax请求到服务器验证
-    
-    //弹窗 提示登录
-
-    //删除功能
-    
-    //登录校验
-    /* 
-      -从本地获取id
-      -Ajax判断
-        --if true 需要把登录按钮隐藏，把退出、添加按钮table显示 
-          - 获取数据 使用模板引擎
-        --false 弹出提示框
-          -
-          
-     */
-
-     /* 
-     弹出框点击注册事件
-     -if operation = '登录' 
-      -跳转登录页面
-     -if           ='删除'
-      -获取对应id
-        -ajax 
-          -// 找到对应的一行，删除
-      */
-    let id =localStorage.getItem('userId');
-    //交给ajax判断
-    $.ajax({
-      url: 'http://127.0.0.1:8080/isLogin',
-      type: 'get',
-      data : { id: id },
-      success:function(res){
-        if(res.code !==200){
-          $('.container-fluid').text('您还没有登录，请先登录');
+  /*
+  主页查看数据，需要先登录，登录过后才可以查看，所以需要一开始就验证一下，用户是否已经登录了
+  验证登录：
+    1. 先从本地存储中获取用户的id
+    2. 发送ajax请求到服务器验证
+  */
+  //先获取id
+  let id =localStorage.getItem('userId');
+  $.ajax({
+    url: 'http://127.0.0.1:8080/isLogin',
+    type: 'get',
+    data: { id: id },
+    success:function(res){
+      if(res.code !==200){
+        $('.container-fluid').text('您还没有登录，请先登录');
         $('#modelId').modal();
-        }else{
-          
-          $('.btn-login').hide();
-        $('.btn-exit').removeAttr('hidden'); // 移除属性 removeAttr
+        
+      }else{
+        $('.btn-login').hide();
+        $('.btn-exit').removeAttr('hidden');
         $('.table').removeAttr('hidden');
-        // 还要显示一个添加英雄的按钮
         $('.btn-add').removeAttr('hidden');
-        }
+
         $.ajax({
           url: 'http://127.0.0.1:8080/getAllHero',
           type: 'post',
           success:function(res){
-            if (res.code === 200) {
-              //调用模板引擎
-              let html = template('tp', res.data);
+            if(res.code ===200){
+               // 要使用模板引擎解决 在js里面写 html结构的问题
+               let html = template('tp', res.data);
+              // console.log(html);
               $('#tbody').append(html);
             }
           }
         })
       }
-    })
-
-     // 定义一个变量，这个变量随着我们的操作的变化而变化
+    }
+  });
+  
   let operation = '登录';
-   // 保存一下点击的删除按钮
-   let delBtn = null;
-$('#btn-sure').on('click',function(){
-  if(operation ==='登录'){
-    console.log(123);
-    //location.href = './login.html';
-  }else if(operation === '删除'){
-    console.log(456);
-    let id =delBtn.attr('data-id');
-    
-
-    $.ajax({
+  // 保存一下点击的删除按钮
+  let delBtn = null;
+  $('#btn-sure').on('click', function (){
+    if(operation ==='登录'){
+      location.href = './login.html';
+    }else if (operation === '删除') {
+       // 得到对应的id
+       let id = delBtn.attr('data-id');
+       $.ajax({
         url: 'http://127.0.0.1:8080/deleteHeroById',
         type: 'get',
         data: { id: id },
@@ -181,18 +156,16 @@ $('#btn-sure').on('click',function(){
           $('#modelId').modal('hide');
         }
       });
-  }
-});
+    }
+  })
 
-//实现删除
-$('#tbody').on('click', '.del', function (){
-  $('.container-fluid').text('你确定要删除吗');
+  
+  // 实现删除
+  $('#tbody').on('click', '.del', function (){
+    $('.container-fluid').text('你确定要删除吗');
     $('#modelId').modal();
     operation = '删除';
-    
     delBtn = $(this);
-    console.log(this);
-   
-})
+  })
 </script>
 </html>

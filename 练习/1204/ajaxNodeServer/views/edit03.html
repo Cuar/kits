@@ -1,0 +1,208 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hero - Admin</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <style>
+        .hero-list img {
+            width: 50px;
+        }
+        .mask {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, .3);
+        }
+        .progress {
+            width: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="page-header container">
+            <h1>王者荣耀 <small>英雄管理器</small></h1>
+        </div>
+    </header>
+    <div class="container hero-list">
+        <form id="form">
+            <input id="id" type="hidden" name='id' value="1">
+            <input type="hidden" name="img" id="headSrc" value="">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td>姓名：</td>
+                        <td><input type="text" id="name" name="name" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>性别：</td>
+                        <td>
+                            <input id="nan" name="gender" value="男" type="radio"><label for="nan">男</label>
+                            <input name="gender" value="女" type="radio" id="nv" checked><label for="nv">女</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>头像：</td>
+                        <td><img src="../static/images/0.jpg" alt="" id="photo" width="100">
+                            <input type="file" id="img"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="button" class="btn btn-primary" id="sub" value="完成"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">提示</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        新增成功，稍后为您自动跳转
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 自己写一个进度条 -->
+    <div class="mask">
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+                style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Description</div>
+        </div>
+    </div>
+</body>
+<script src="../static/js/jquery.js"></script>
+<script src="../static/js/bootstrap.js"></script>
+<script>
+/* 修改页面
+    1.根据id获取原来数据
+        -ajax "英雄"案例根据id获取英雄数据
+            -需要到模板里面把对应的id变成动态的
+            -图片的地址，和修改的时候需要的id，都需要先存储一下，存在隐藏域里面
+    2.实现上传
+        -获得图片
+        -转为文件流
+        -发送Ajax请求     
+            -   获取属性
+          -进度条  
+
+    3.点击完成编辑    
+        -验证数据是否合法
+            -Ajax
+        -点击确认 跳转    
+ */
+
+let id =location.search.substring(4);
+$.ajax({
+    url: 'http://127.0.0.1:8080/getHeroById',
+        type: 'get',
+        data: { id: id },
+        success :function(res){
+            if(res.code===200){
+                //获取 并修改
+                $('#name').val(res.data.name);
+
+                let gender =res.data.gender == '男';
+                $('#nan').prop('checked',gender);
+                $('#photo').attr('src','../static/images'+res.data.img);
+                // 为了在提交的时候能够得到图片。需要使用隐藏域存一下
+                $('#headSrc').val(res.data.img);
+                $('#id').val(res.data.id);
+
+            }
+        }
+});
+/* 实现上传 */
+$('#img').on('change',function(){
+    let file =this.files[0];
+    let fd =new FormData();
+    fd.append('pic',files);
+    $.ajax({
+        url: 'http://127.0.0.1:8080/uploadHeadImg',
+            type: 'post',
+            data: fd,
+            processData : false,
+            contentType : false,
+            success:function(res){
+                if(res.code ===200){
+                    //mask 进度条
+                    $('.mask').hide();
+                    //没看懂
+                    $('#photo').attr('src',res.baseDir + res.filePath);
+                    $('#headSrc').val(res.filePath);
+
+                }
+
+            },
+
+            //?
+            xhr:function(){
+                let xhr= new XMLHttpRequest();
+                //进度条
+                xhr.upload.onprogress =function(e){
+                    // e.loaded / e.total?
+                    let percent =(e.loaded / e.total).toFixed(4) *100 ;
+                    $('.progress-bar').width(percent + '%');
+                    $('.progress-bar').text(percent + '%');
+                }
+                return xhr;
+            },
+             // 在发送之前调用的回调函数
+            beforeSend : function(){
+                $('.mask').show();
+            }
+
+    })
+})
+
+/* 点击完成编辑 */
+$('#sub').on('click', function(){
+    // 先验证数据是否合法，
+    //方法通过序列化表单值
+    let data = $('#form').serialize();
+    $.ajax({
+            url : 'http://127.0.0.1:8080/eidtHeroById',
+            type : 'post',
+            data : data,
+            success : function(res){
+                console.log(res);
+                if(res.code === 200){
+                    // 弹窗提示用户，然后跳转
+                    $('.container-fluid').text(res.msg);
+                    $('#modelId').modal();
+                }
+            }
+        });
+})
+// on hide.bs.modal
+$('#modelId').on('hide.bs.modal',function(){
+
+        location.href = './index back.html';
+    })
+</script>
+
+</html>

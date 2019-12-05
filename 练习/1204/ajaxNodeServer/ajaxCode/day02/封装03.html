@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+      //封装函数
+    function ajax(obj) {
+      obj =obj || {};
+      obj.url =obj.url || '';
+      obj.type = obj.type || 'get';
+      obj.data =obj.data || {};
+
+
+      let arr=[];
+      for(let key in obj.data){
+        arr.push(`${key}=${obj.data[key]}`)
+      }
+      obj.data =arr.join('&');
+      //创异步对象
+      let xhr = new XMLHttpRequest();
+      //设置请求方式 and 地址
+      if (obj.type.toLowerCase() === "get") {
+        obj.url += "?" + data;
+      }
+      xhr.open(obj.type, obj.url);
+
+      //发送请求
+      // 如果请求是post，要把数据放在send里面，同时需要设定 请求头
+      if (obj.type.toLowerCase() === "post") {
+        xhr.setRequestHeader(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        );
+        //发送请求
+        xhr.send(obj.data);
+      } else {
+        xhr.send();
+      }
+      //监听事件
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          let response = xhr.responseText;
+
+          if(xhr.getResponseHeader('Content-Type').indexOf('json')!==-1){
+            response =JSON.parse(xhr.responseText);
+          }
+          // 如果请求成功，就执行对应的逻辑
+          obj.callback && obj.callback(response);
+        }
+      };
+    }
+
+    /* 实现注册 */
+  /*   ajax('http://127.0.0.1:8080/doRegister','post',
+'userName=ergouzi2&password=123456&phone=12345678901'
+,function(res){
+    console.log(res);
+}); */
+/*  */
+
+/* ajax('http://127.0.0.1:8080/doRegister','post',{
+    userName : 'ergouzi4',
+    password : '123456',
+    phone : '12345678901'
+} ,function(res){
+  console.log(res);
+}) */
+ajax({
+  url : 'http://127.0.0.1:8080/doRegister',
+  type : 'post',
+  data : {
+    userName : 'dagouzi5',
+    password : '123456',
+    phone : '12345678901'
+  },
+  callback:function(res){
+    if(res.code === 200){
+      alert('注册成功，3秒后户自动跳转');
+    }
+  }
+})
+  </script>
+</html>
