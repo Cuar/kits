@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <class="f">
+  <span id="m">10</span>
+  <span>:</span>
+  <span id="s">00</span>
+</div>
+<div class="btns">
+  <span id="pause">暂停</span>
+  <span id="continue">继续</span>
+</div>
+</body><script>
+    var el_m =document.querySelector('#m');
+    console.log(el_m);
+    var el_s =document.querySelector('#s');
+
+    var el_p =document.querySelector('#pause');
+    var el_c =document.querySelector('#continue')
+
+    function fn(){
+        var m = parseInt(el_m.innerHTML);
+        var s = parseInt(el_s.innerHTML);
+        //分化秒
+        if(s === 0){
+            s =60 ;
+            m--;
+        }
+        s--;
+        //自动停止
+        if(m===0 && s===0){
+            clearInterval(timer);
+        }
+        s =s< 10 ? '0' + s:s ;
+        el_m.innerHTML =m ;
+        el_s.innerHTML =s ;
+
+        //倒计时
+      
+    }
+    var timer = setInterval(fn,1000);
+
+    el_p.onclick = function(){
+  clearInterval(timer);
+}
+
+el_c.onclick = function(){
+  timer = setInterval(fn,1000);
+}
+</script>
+</html>
