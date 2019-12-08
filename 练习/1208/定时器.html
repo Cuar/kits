@@ -18,15 +18,18 @@
 </div>
 </body><script>
     var el_m =document.querySelector('#m');
-    console.log(el_m);
+   
     var el_s =document.querySelector('#s');
 
     var el_p =document.querySelector('#pause');
     var el_c =document.querySelector('#continue')
 
     function fn(){
+        console.log(el_m);
         var m = parseInt(el_m.innerHTML);
         var s = parseInt(el_s.innerHTML);
+        console.log(el_m.innerHTML);
+        console.log(m);
         //分化秒
         if(s === 0){
             s =60 ;

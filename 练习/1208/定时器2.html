@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <class="f">
+  <span id="m">10</span>
+  <span>:</span>
+  <span id="s">00</span>
+</div>
+<div class="btns">
+  <span id="pause">暂停</span>
+  <span id="continue">继续</span>
+</div>
+</body>
+<script>
+  let m1=document.querySelector('#m');
+  let s1 =document.querySelector('#s');
+  let p1=document.querySelector('#pause');
+  let c1 =document.querySelector('#continue');
+
+//倒计时函数
+function fn(){
+  //将元素转化为整数
+  var m =parseInt(m1.innerHTML);
+  var s =parseInt(s1.innerHTML);
+
+  //
+  if(s === 0){
+    s=60;
+    m--;
+  }
+  s--;
+
+  if(m==0 && s == 0){
+    //调用
+    clearInterval(timer);
+  }
+  //
+  s=s<10? '0'+s :s ;
+  //执行完一轮后
+  m1.innerHTML =m;
+  s1.innerHTML =s;
+
+}
+
+//执行 fn 调用的函数
+var timer = setInterval(fn,1000);
+
+//点击暂停
+  p1.onclick=function(){
+    clearInterval(timer);
+    setTimeout(timer);
+    console.log(timer);
+    
+  }
+  //点击继续
+  c1.onclick=function(){
+    timer = setInterval(fn,1000);
+    console.log(timer);
+  }
+</script>
+</html>
