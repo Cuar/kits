@@ -1,0 +1,19 @@
+{
+  "name": "1214",
+  "version": "1.0.0",
+  "main": "01.app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "art-template": "^4.13.2",
+    "momen": "0.0.1-security"
+  },
+  "devDependencies": {
+    "moment": "^2.24.0"
+  },
+  "description": ""
+}
