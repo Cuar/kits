@@ -13,7 +13,7 @@ kits.randomRGB = function(){
   var b = kits.randomInt(0,255);
   return 'rgb('+r+','+g+','+b+')';
   
-}
+} 
 
 /* 封装随机十六进制颜色的方法 */
 kits.randonHexColor = function(){
